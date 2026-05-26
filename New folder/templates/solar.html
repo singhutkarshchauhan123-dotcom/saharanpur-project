@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel</title>
+
+    <link href="../libs/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../libs/v6.13.0-dist/ol.css">
+    <link rel="stylesheet" href="../libs/ol-layerswitcher-master/dist/ol-layerswitcher.css" />
+    <link rel="sylesheet" href="../libs/ol-geocoder/ol-geocoder.css" />
+    <!-- <link rel="stylesheet" href="libs/ol-popup/ol-popup.css"/> -->
+    <link rel="stylesheet" href="../libs/jquery-ui-1.12.1/jquery-ui.css">
+
+    <script src="../libs/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../libs/jquery.js"></script>
+    <script src="../libs/v6.13.0-dist/ol.js"></script>
+    <script src="../libs/ol-layerswitcher-master/dist/ol-layerswitcher.js"></script>
+    <script src="../libs/ol-geocoder/ol-geocoder.js"></script>
+    <script src="../libs/ol-popup/ol-popup.js"></script>
+    <script src="../libs/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="../libs/jquery-ui-1.12.1/jquery-ui.js"></script>
+
+	
+
+
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" integrity="sha384-d3UHjPdzJkZuk5H3qKYMLRyWLAQBJbby2yr2Q58hXXtAGF8RSNO9jpLDlKKPv5v3" crossorigin="anonymous"></script>
+
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" integrity="sha384-OXVF05DQEe311p6ohU11NwlnX08FzMCsyoXzGOaL+83dKAb3qS17yZJxESl8YrJQ" crossorigin="anonymous">
+				
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+				
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha384-PPIZEGYM1v8zp5Py7UjFb79S58UeqCL9pYVnVPURKEqvioPROaVAJKKLzvH2rDnI" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+    
+   
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" class="fabicon" href="../logo/logo_tree.png" />
+    
+     <link rel="stylesheet" href="../style/solar.css"> 
+    <!-- <link rel="stylesheet" href="../style/responsive.css"> -->
+</head>
+
+<body>
+    <!---------------------- header section start -------------------------->
+    <div class="header">
+        <!-- <i class="fas fa-bars hamburger"></i> -->
+        <div class="center-content">
+            <img src="../logo/jal_kal.png" class="logo" alt="" />
+            <h2 class="title">Utility Scale Solar Energy Project</h2>
+            <img src="../logo/remoteSensing_logo.jpg" class="logo" alt="dp" />
+            <img src="../logo/uplogo.png" class="logo1" alt="dp" />
+           
+        </div>
+            
+    </div>
+	<div style="height:4px;width:100%; background-color: aliceblue;display: flex;"></div>
+ <!-- HEADER -->
+ 
+
+    <!-- <div class="layer-controls">
+      <label><input type="checkbox" id="cwrLayer" checked> CWR</label>
+	  <label><input type="checkbox" id="ohtLayer" > OHT</label>
+      <label><input type="checkbox" id="tubewellLayer" > Tubewell</label>
+     
+    </div> -->
+  </header>
+
+  <!-- MAP BODY -->
+  <!-- <div id="map" style="width:100%; height:100%;"></div>
+
+
+
+  <div class="table-panel">
+    <table id="solarTable"></table>
+  </div>   
+   -->
+<div class="main-container">
+
+  <div id="map"></div>
+
+  <div class="table-panel">
+    <div class="table-header">solar_points</div>
+    <table id="solarTable"></table>
+  </div>
+
+</div>
+<div id="areaSummaryCards"></div>
+
+<div class="chart-grid">
+  <div class="chart-card"><canvas id="areaBucketChart"></canvas></div>
+  <div class="chart-card"><canvas id="areaPieChart"></canvas></div>
+  <div class="chart-card"><canvas id="districtAreaChart"></canvas></div>
+  <div class="chart-card"><canvas id="top10AreaChart"></canvas></div>
+</div>
+  
+<div id="popup" class="ol-popup">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
+
+<!-- <div id="legend" class="legend">
+  <h4>Legend</h4>
+
+ <div><span class="dot oht"></span> OHT</div>
+  <div><span class="dot cwr"></span> CWR</div>
+  <div><span class="dot tubewell"></span> Tubewell</div> -->
+<!-- </div>  -->
+        <!----------- footer section start ---------->
+        <div class="footer">
+            &copy; 2026 UP Remote Sensing Applications Centre. All rights reserved.
+        </div>
+        <!--------- footer section end ----------->
+     <script src="../config.js"></script>
+        <script src="../javascript/solar1.js"></script>
+        <!-- //<script src="upneda_chart_code.js"></script> -->
+		
+
+
+
+</body>
+
+</html>

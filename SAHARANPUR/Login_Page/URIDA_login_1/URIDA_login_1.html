@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>LOGIN_FORM</title>
+    <link rel="shortcut icon" type="image/x-icon" class="fabicon" href="..assets/icons/logo_tree.png" />
+    <link rel="stylesheet" href="URIDA_login_1.css"> 
+</head>
+
+<body>
+    <h1 style="position: absolute;top: 17%;right: 19%;color: #ff8800;font-size: 170%; text-shadow: 5px 5px 5px rgba(82, 81, 81, 0.5);"> URBAN ROAD DIRECTORY PORTAL</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-item">
+            <img src="logo/URIDA.PNG" alt="Logo 1" class="logo">
+        </div>
+    </div>
+    </header>
+
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Image Section -->
+        <div class="image-section">
+            <div class="img-wrap">
+                <img src="logo/CM-Yogi-PNG.png" alt="Image 1">
+                <div class="img-caption" style="color: #000000; width:600px;height: 100px; text-align: -webkit-center;  ">
+                <h3 style="color: rgb(255, 123, 0); width: 200px; text-align:center;    margin-top: 0%; left: -9%; position: relative;">Shri Yogi Adityanath</h3>
+                <p class="small-font1">
+                Hon'ble Chief Minister</br>
+                    Uttar Pradesh</p>
+                </div>
+            </div>
+            <!-- <div class="image-section2"> -->
+                
+            <div class="img-wrap1">
+                <img src="logo/urida minister.png" alt="Image 2">
+                <div class="img-caption" style="color: #000000;width: 200px;text-align: -webkit-center;position: relative;left: 6%; ">
+                    <h3 style="color: rgb(255, 123, 0);margin: 2%;">Shri Arvind Kumar Sharma</h3>
+                    <p class="small-font">
+                    Hon'ble Minister</br>
+                    Urban Development Department,<br>
+                    Uttar Pradesh</p>
+                </div>
+            </div>
+            <div class="img-wrap2">
+                <img src="logo/state_urban.png" alt="Image 3">
+                <div class="img-caption"style="color: #000000;width: 200px;right:0px;text-align: -webkit-center;right:7px;position: relative;               ">
+                    <h3 style="color: rgb(255, 123, 0);margin: 2%;">Shri Rakesh Rathor</h3>
+                    <p class="small-font">
+                    Hon'ble Minister of State<br>
+                    Urban Development Department,<br>
+                    Uttar Pradesh
+                    </p></div>
+            </div>
+            <div class="img-wrap3">
+                <img src="logo/principal1.png" alt="Image 4">
+                <div class="img-caption"style="color: #000000;width: 115%;text-align: -webkit-center;                ">
+                    <h3 style="color: rgb(255, 123, 0); margin: -2%; position: relative; left: -5%;">Shri Amrit Abhijat (I.A.S.) </h3>
+                    <p class="small-font">
+                    Principal Secretary,</br>
+                    Urban Development Department,<br>
+                    Urban Employment & Poverty </br>
+                    Alleviation , Uttar Pradesh
+                    </p></div>
+            </div>
+            <div class="img-wrap4">
+                <img src="logo/ceo.png" alt="Image 5">
+                <div class="img-caption"style="color: #000000;width: 115%; text-align: -webkit-center;                 ">
+                    
+                    <h3 style="color: rgb(255, 123, 0);margin-top: -2%;position: relative;left: -32%;font-size: 111%;width: 147%;">Shri Mahendra Bahadur Singh (I.A.S.)</h3>
+                    <p class="small-font"style="margin-top: -7%">
+                        CEO URIDA,
+                        Special Secretary,<br>
+                        Urban Development Department,
+                        Director of Urban Transport<br>
+                        Uttar Pradesh
+                    </p></div>
+                </div>
+            </div>
+        <!-- </div> -->
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="logo-container1">
+                    <img src="logo/rsac banner.png" alt="RSAC Logo" class="logo1">
+                </div>
+                <div class="text-container">
+                    <p> DEVELOPED BY :  </p>
+                </div>
+            </div>
+           
+             <!-- Forms Wrapper -->
+        <div class="form-wrapper">
+            <!-- Login Form -->
+            <form class="form" id="login">
+                <!-- <h1 class="form__title">Login</h1> -->
+                <div class="form__message form__message--error"></div>
+                <div class="form__input-group">
+                    <input type="text" id="loginUsername" class="form__input" autofocus placeholder="Username or email">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <div class="form__input-group">
+                    <input type="password" id="loginPassword" class="form__input" placeholder="Password">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <button class="form__button" type="submit">Login</button>
+                <!-- <p class="form__text">
+                    <a href="#" class="form__link" id="linkForgotPassword">Forgot your password?</a>
+                </p> -->
+                <p class="form__text">
+                    <a class="form__link" href="#" id="linkCreateAccount">Don't have an account? Sign up </a>
+                </p>
+            </form>
+
+            <!-- Sign-Up Form -->
+            <form class="form form--hidden" id="createAccount">
+                <h1 class="form__title"> CREATE ACCOUNT </h1>
+                <div class="form__message form__message--error"></div>
+                <div class="form__input-group">
+                
+                </div>
+                <div class="form__input-group">
+                    <input type="text" id="signupUsername" class="form__input" autofocus placeholder="Username">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <div class="form__input-group">
+                    <input type="text" id="signupEmail" class="form__input" placeholder="Email Address">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <div class="form__input-group">
+                    <input type="password" id="signupPassword" class="form__input" placeholder="Password">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <div class="form__input-group">
+                    <input type="password" id="signupConfirmPassword" class="form__input" placeholder="Confirm password">
+                    <div class="form__input-error-message"></div>
+                </div>
+                <button class="form__button" type="submit">Continue</button>
+                <p class="form__text">
+                    <a class="form__link" href="#" id="linkLogin">Already have an account? Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <!-- Footer -->
+   
+
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="URIDA_login_1.js"></script>
+</body>
+</html>

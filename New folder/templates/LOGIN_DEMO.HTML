@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPNEDA - Solar Energy Project PORTAL</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f4f7fb;
+    }
+
+    .main-header {
+      width: 100%;
+      background: linear-gradient(90deg, #06284d, #0b4b87);
+      color: #fff;
+      padding: 18px 24px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    /* LOGIN SCREEN */
+    .login-screen {
+      min-height: calc(100vh - 76px);
+      background: linear-gradient(rgba(6, 25, 52, 0.75), rgba(6, 25, 52, 0.75)),
+        url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .login-top {
+      background: linear-gradient(135deg, #0a2f57, #0f67b1);
+      color: #fff;
+      text-align: center;
+      padding: 24px 20px;
+    }
+
+    .login-top h2 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .login-top p {
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .login-body {
+      padding: 28px 24px 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0b2b4d;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #c9d4df;
+      border-radius: 8px;
+      padding: 0 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.25s;
+    }
+
+    .form-group input:focus {
+      border-color: #0f67b1;
+      box-shadow: 0 0 0 3px rgba(15, 103, 177, 0.15);
+    }
+
+    .password-box {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 13px;
+      color: #0f67b1;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #0a4d8c, #0f67b1);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 103, 177, 0.25);
+    }
+
+    .error-msg {
+      margin-top: 12px;
+      color: #d10000;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+      font-weight: 600;
+    }
+
+    .success-msg {
+      margin-top: 12px;
+      color: #0b7a2a;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* PORTAL SCREEN */
+    .portal-screen {
+      display: none;
+      min-height: calc(100vh - 76px);
+      background: #eef3f9;
+    }
+
+    .portal-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 14px 20px;
+      border-bottom: 1px solid #d9e2ec;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .portal-user {
+      font-size: 15px;
+      color: #08345e;
+      font-weight: 700;
+    }
+
+    .logout-btn {
+      padding: 10px 16px;
+      background: #c62828;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .logout-btn:hover {
+      background: #a91f1f;
+    }
+
+    .portal-content {
+      padding: 20px;
+    }
+
+    .welcome-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .welcome-box h3 {
+      color: #08345e;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .welcome-box p {
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .grid-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .info-card h4 {
+      color: #0b4b87;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .info-card p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .map-placeholder {
+      margin-top: 20px;
+      background: #dfe9f5;
+      border: 2px dashed #8aa7c4;
+      border-radius: 12px;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #08345e;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-box {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-header {
+        font-size: 20px;
+        padding: 14px 12px;
+      }
+
+      .login-top h2 {
+        font-size: 21px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid-box {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-topbar {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-header {
+        font-size: 17px;
+        line-height: 1.4;
+      }
+
+      .login-body {
+        padding: 22px 16px 18px;
+      }
+
+      .portal-content {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-header">
+    UPNEDA - Solar Energy Project PORTAL
+  </div>
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-top">
+        <h2>Login</h2>
+        <p>Enter valid username and password</p>
+      </div>
+
+      <div class="login-body">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter username"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-box">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                autocomplete="off"
+              />
+              <span class="toggle-password" id="togglePassword">Show</span>
+            </div>
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+
+          <div class="error-msg" id="errorMsg">
+            Invalid username or password.
+          </div>
+
+          <div class="success-msg" id="successMsg">
+            Login successful. Opening portal...
+          </div>
+
+          <div class="footer-note">
+            Powered by UPNEDA Solar Management System
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTAL SCREEN -->
+  <div class="portal-screen" id="portalScreen">
+    <div class="portal-topbar">
+      <div class="portal-user" id="portalUser">Welcome</div>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+
+    <div class="portal-content">
+      <div class="welcome-box">
+        <h3>Solar Energy Project Dashboard</h3>
+        <p>
+          Login successful. Ab aap apna actual map, layer panel, table section,
+          charts, aur solar project portal content yahan rakh sakte ho.
+        </p>
+      </div>
+
+      <div class="grid-box">
+        <div class="info-card">
+          <h4>Project Monitoring</h4>
+          <p>State level solar projects ka monitoring section yahan aa sakta hai.</p>
+        </div>
+
+        <div class="info-card">
+          <h4>Layer Management</h4>
+          <p>GeoServer/OpenLayers wali map layers yahan integrate ki ja sakti hain.</p>
+        </div>
+
+        <div class="info-card">
+          <h4>Reports & Tables</h4>
+          <p>Solar plants, high mast, street light, aur other project tables yahan show hongi.</p>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        Yahan apna main portal / map / dashboard content paste karo
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================= VALID CREDENTIALS =================
+    // Yahan apne actual username-password daal do
+    const validUsers = [
+      { username: "admin", password: "admin123" },
+      { username: "upneda", password: "solar@123" },
+      { username: "user1", password: "pass123" }
+    ];
+
+    const loginScreen = document.getElementById("loginScreen");
+    const portalScreen = document.getElementById("portalScreen");
+    const portalUser = document.getElementById("portalUser");
+
+    const loginForm = document.getElementById("loginForm");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const togglePassword = document.getElementById("togglePassword");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    function showPortal(username) {
+      loginScreen.style.display = "none";
+      portalScreen.style.display = "block";
+      portalUser.innerText = "Welcome, " + username;
+    }
+
+    function showLogin() {
+      loginScreen.style.display = "flex";
+      portalScreen.style.display = "none";
+    }
+
+    // page load par check
+    if (sessionStorage.getItem("isLoggedIn") === "true") {
+      const savedUser = sessionStorage.getItem("loggedInUser") || "User";
+      showPortal(savedUser);
+    } else {
+      showLogin();
+    }
+
+    togglePassword.addEventListener("click", function () {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePassword.innerText = "Hide";
+      } else {
+        passwordInput.type = "password";
+        togglePassword.innerText = "Show";
+      }
+    });
+
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      errorMsg.style.display = "none";
+      successMsg.style.display = "none";
+
+      if (!username || !password) {
+        errorMsg.innerText = "Please enter username and password.";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      const matchedUser = validUsers.find(function (user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (!matchedUser) {
+        errorMsg.innerText = "Invalid username or password.";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      sessionStorage.setItem("isLoggedIn", "true");
+      sessionStorage.setItem("loggedInUser", matchedUser.username);
+
+      successMsg.style.display = "block";
+
+      setTimeout(function () {
+      window.location.href = "http://103.15.81.74:8050/templates/upneda.html";   
+      }, 700);
+    });
+
+    logoutBtn.addEventListener("click", function () {
+      sessionStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("loggedInUser");
+      usernameInput.value = "";
+      passwordInput.value = "";
+      errorMsg.style.display = "none";
+      successMsg.style.display = "none";
+      showLogin();
+    });
+  </script>
+</body>
+</html>

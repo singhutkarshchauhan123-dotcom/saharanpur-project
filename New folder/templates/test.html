@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Road patches</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.2/ol.css">
+
+<style>
+body{margin:0}
+#map{height:100vh;width:100%}
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/ol@7.5.2/dist/ol.js"></script>
+
+<script>
+
+// road coordinates
+const coords=[
+[80.9462,26.8467],
+[80.9471,26.8470],
+[80.9482,26.8478],
+[80.9494,26.8482],
+[80.9505,26.8488],
+[80.9518,26.8496],
+[80.9530,26.8502]
+];
+
+// convert for map
+const projected=coords.map(c=>ol.proj.fromLonLat(c));
+
+const roadGeom=new ol.geom.LineString(projected);
+
+// road feature
+const road=new ol.Feature({geometry:roadGeom});
+
+road.setStyle(new ol.style.Style({
+stroke:new ol.style.Stroke({
+color:"#1976D2",
+width:5
+})
+}));
+
+// ---- IMPORTANT PART ----
+// measure length correctly
+const length=roadGeom.clone()
+.transform('EPSG:3857','EPSG:4326')
+.getLength();
+
+
+// patch distances (meters)
+const patches=[100,1000,2000,3000,4000,5000,6000,7000,8000];
+
+const features=[road];
+
+
+// START
+const start=new ol.Feature({
+geometry:new ol.geom.Point(projected[0])
+});
+
+start.setStyle(new ol.style.Style({
+image:new ol.style.Circle({
+radius:10,
+fill:new ol.style.Fill({color:"green"}),
+stroke:new ol.style.Stroke({color:"#fff",width:2})
+})
+}));
+
+features.push(start);
+
+
+// PATCH MARKERS
+patches.forEach(d=>{
+
+let fraction=d/8000;   // because road = 8km
+
+if(fraction<1){
+
+let coord=roadGeom.getCoordinateAt(fraction);
+
+let marker=new ol.Feature({
+geometry:new ol.geom.Point(coord)
+});
+
+marker.setStyle(new ol.style.Style({
+image:new ol.style.Circle({
+radius:7,
+fill:new ol.style.Fill({color:"orange"}),
+stroke:new ol.style.Stroke({color:"#fff",width:2})
+})
+}));
+
+features.push(marker);
+
+}
+
+});
+
+
+// END
+const end=new ol.Feature({
+geometry:new ol.geom.Point(projected[projected.length-1])
+});
+
+end.setStyle(new ol.style.Style({
+image:new ol.style.Circle({
+radius:10,
+fill:new ol.style.Fill({color:"red"}),
+stroke:new ol.style.Stroke({color:"#fff",width:2})
+})
+}));
+
+features.push(end);
+
+
+// layer
+const vectorLayer=new ol.layer.Vector({
+source:new ol.source.Vector({
+features:features
+})
+});
+
+
+// map
+const map=new ol.Map({
+target:"map",
+layers:[
+new ol.layer.Tile({
+source:new ol.source.OSM()
+}),
+vectorLayer
+],
+view:new ol.View({
+center:projected[0],
+zoom:15
+})
+});
+
+</script>
+
+</body>
+</html>

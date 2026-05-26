@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aligarh</title>
+
+    <link href="/libs/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/v6.13.0-dist/ol.css">
+    <link rel="stylesheet" href="/libs/ol-layerswitcher-master/dist/ol-layerswitcher.css" />
+    <link rel="sylesheet" href="/libs/ol-geocoder/ol-geocoder.css" />
+    <link rel="stylesheet" href="/libs/jquery-ui-1.12.1/jquery-ui.css">
+
+    <script src="/libs/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/libs/jquery.js"></script>
+    <script src="/libs/v6.13.0-dist/ol.js"></script>
+    <script src="/libs/ol-layerswitcher-master/dist/ol-layerswitcher.js"></script>
+    <script src="/libs/ol-geocoder/ol-geocoder.js"></script>
+    <script src="/libs/ol-popup/ol-popup.js"></script>
+    <script src="/libs/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="/libs/jquery-ui-1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" class="fabicon" href="../assets/icons/logo_tree.png" />
+
+    <link rel="stylesheet" href="../style/Aligarh.css">
+    <link rel="stylesheet" href="../style/responsive.css">
+</head>
+
+<body>
+    <!---------------------- header section start -------------------------->
+    <div class="header">
+        <i class="fas fa-bars hamburger"></i>
+        <div class="center-content">
+            <img src="../assets/logo/aligarh-logo.png" class="logo" alt="" />
+            <h2 class="title">Aligarh Nagar Nigam</h2>
+            <img src="../assets/logo/rsac (1).png" class="logo" alt="dp" />
+        </div>
+
+        <div class="search-container" id="search-bar">
+            <select id="roadNamesDropdown" style="width: 300px;"></select>
+        </div>
+
+    </div>
+    <!---------------------- header section end -------------------------->
+
+    <!---------------------- sidebar section start -------------------------->
+    <div class="sidebar">
+        <span><i class="fas fa-times cancel-icon"></i></span>
+
+        <!-- Bootstrap Tabs -->
+        <ul class="nav nav-tabs" id="sidebarTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="amenities-tab" data-bs-toggle="tab" data-bs-target="#amenities"
+                    type="button" role="tab" aria-controls="amenities" aria-selected="true"> Amenities </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button"
+                    role="tab" aria-controls="data" aria-selected="false"> Network </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="utilities-tab" data-bs-toggle="tab" data-bs-target="#utilities"
+                    type="button" role="tab" aria-controls="utilities" aria-selected="false">
+                    Others
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="assets-tab" data-bs-toggle="tab" data-bs-target="#assets" type="button"
+                    role="tab" aria-controls="assets" aria-selected="false">
+                    Road Analysis
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="sidebarTabsContent">
+            <!-- Amenities Tab Content -->
+            <div class="tab-pane fade show active" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
+                <h2></h2>
+                <form>
+                    <label>
+                        <i class="icon fas fa-university" style="margin-right: 14px;"></i>
+                        <input type="checkbox" id="showBanks" class="main-option" name="option3" />
+                        <span class="text">Banks - 290</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-hotel" style="margin-right: 13.8px;"></i>
+                        <input type="checkbox" id="showHotel" class="main-option" name="option13" />
+                        <span class="text">Hotels - 95</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-hospital"></i>
+                        <input type="checkbox" id="showHospital" class="main-option" name="option4" />
+                        <span class="text">Hospitals - 175</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-tree" style="margin-right: 15.5px;"></i>
+                        <input type="checkbox" id="showParks" class="main-option" name="option8" />
+                        <span class="text">Parks - 127</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-bus" style="margin-right: 12px;"></i>
+                        <input type="checkbox" id="showBus" class="main-option" name="option11" />
+                        <span class="text">Bus Stops - 8</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-gas-pump" style="margin-right: 12px;"></i>
+                        <input type="checkbox" id="showPetrol" class="main-option" name="option5" />
+                        <span class="text">Petrol Pump - 15</span>
+                    </label>
+                    <label>
+                        <i class="icon fa-solid fa-restroom" style="margin-right: 14.5px;"></i>
+                        <input type="checkbox" id="showCommunitytoilet" class="main-option" name="option14" />
+                        <span class="text">Community Toilet - 59</span>
+                    </label>
+
+                    <label>
+                        <i class="icon fa-solid fa-bolt" style="margin-right: 14.5px;"></i>
+                        <input type="checkbox" id="showElectric-Substation" class="main-option" name="option14" />
+                        <span class="text">Electric-Substation - 10</span>
+                    </label>
+
+                    <label>
+                        <i class="icon fa-solid fa-landmark" style="margin-right: 14.5px;"></i>
+                        <input type="checkbox" id="showLandmarks" class="main-option" name="option14" />
+                        <span class="text">Landmarks - 49</span>
+                    </label>
+
+                    <label>
+                        <i class="icon fas fa-cross" style="margin-right: 14.5px;"></i>
+                        <input type="checkbox" id="showGraveyard" class="main-option" name="option14" />
+                        <span class="text">Graveyard - 13</span>
+                    </label>
+
+
+                </form>
+            </div>
+
+            <!-- Network Tab Content -->
+            <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+                <!-- <h2>Network</h2> -->
+                <form>
+                    <label>
+                        <i class="icon fas fa-route"></i>
+                        <input type="checkbox" id="ShowRoads" class="main-option" name="option1" />
+                        <span class="text">Roads</span>
+                    </label>
+                </form>
+            </div>
+
+            <!-- Others Tab Content -->
+            <div class="tab-pane fade" id="utilities" role="tabpanel" aria-labelledby="utilities-tab">
+                <!-- <h2>others</h2> -->
+                <form>
+                    <label>
+                        <i class="icon fas fa-book-open"></i> <!-- <i class="icon fas fa-Education"></i> -->
+                        <input type="checkbox" id="showEducation" class="main-option" name="option2" />
+                        <span class="text">Educational Institutes - 219</span>
+                    </label>
+                    <label>
+                        <i class="fa-sharp fa-solid fa-gopuram" style="color: #050505; margin-right: 16px;"></i>
+                        <input type="checkbox" id="showReligious" class="main-option" name="option10" />
+                        <span class="text">Religious Places - 236</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-envelope" style="margin-right: 14px;"></i>
+                        <input type="checkbox" id="showPostOffice" class="main-option" name="option12" />
+                        <span class="text">Post Offices - 32 </span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building" style="margin-right: 16px;"></i>
+                        <input type="checkbox" id="showStateGov" class="main-option" name="option1" />
+                        <span class="text">State Government Offices - 27</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building" style="margin-right: 15px;"></i>
+                        <input type="checkbox" id="showCentralGov" class="main-option" name="option1" />
+                        <span class="text"> Government Offices - 25</span>
+
+                    </label>
+
+                </form>
+            </div>
+
+            <!-- Assets Tab Content -->
+            <div class="tab-pane fade" id="assets" role="tabpanel" aria-labelledby="assets-tab">
+                <!-- <h2>Assets</h2> -->
+                <form>
+                    <label>
+                        <i class="icon fas fa-building"></i>
+                        <input type="checkbox" id="Education_Road" class="main-option" name="option1" />
+                        <span class="text">Education's Road</span>
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building"></i>
+                        <input type="checkbox" id="Bank_Road" class="main-option" name="option1" />
+                        <span class="text">Bank's Road</span>
+
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building"></i>
+                        <input type="checkbox" id="Hospital_Road" class="main-option" name="option1" />
+                        <span class="text">Hospital's Road</span>
+
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building"></i>
+                        <input type="checkbox" id="Park_Road" class="main-option" name="option1" />
+                        <span class="text">Park's Road</span>
+
+                    </label>
+                    <label>
+                        <i class="icon fas fa-building"></i>
+                        <input type="checkbox" id="Hotel_Road" class="main-option" name="option1" />
+                        <span class="text">Hotel's Road</span>
+
+                    </label>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!---------------------- sidebar section end -------------------------->
+
+    <!---------------------- main-container section start -------------------------->
+    <div class="main-container">
+
+        <!---------------------- map section start ------------------>
+        <div id="map">
+            <div class="map-icons-left">
+                <button class="map-icon" title="Data Analysis" onclick="data_analysis()">
+                    <i class="fas fa-chart-simple"></i></a></button>
+                <h6 class="h6">Data Analysis</h6>
+
+                <button class="map-icon" id="road_btn" title="Zone wise Road" onclick="road_filter()"><i
+                        class="fas fa-road"></i></button>
+                <h6 class="h6">Road Filter</h6>
+
+                <button class="map-icon" id="query_btn" onclick="query_panel1()" title="Query Panel"><i
+                        class="fas fa-window-maximize"></i></button>
+                <h6 class="h6"> Query </h6>
+
+            </div>
+
+            <div class="map-icons">
+                <button class="map-icon" id="search-icon" title="Search"><i class="fas fa-search"></i></button>
+                <h6 class="h6"> Search </h6>
+                <button class="map-icon" id="table_icon" title="Summary Data" onclick="summary_table()"><i
+                        class="fas fa-table "></i></button>
+                <h6 class="h6"> Summary </h6>
+
+                <button class="map-icon" id="clear-icon" title="Clear" onclick="delete_layers()"><i
+                        class="fa fa-trash"></i></button>
+                <h6 class="h6">Clear</h6>
+            </div>
+
+        </div>
+        <!-------------------- map section end -------------------->
+
+        <!---------------------- query panel section start -------------------------->
+        <div id="query_tab" class="query-tab">
+            <span class="tab-cancel-icon"><i class="fas fa-times cancel-icon"></i></span>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist" style="font-size:11px;">
+                    <button class="nav-link " id="nav-attributes-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-attributes" type="button" role="tab" aria-controls="nav-attributes"
+                        aria-selected="true" style="font-size:12px;color:white">Select by Attributes</button>
+                    <button class="nav-link" id="nav-draw-tab" data-bs-toggle="tab" data-bs-target="#nav-draw"
+                        type="button" role="tab" aria-controls="nav-draw" aria-selected="false"
+                        style="font-size:12px;color:white">Select by Draw</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-attributes" role="tabpanel"
+                    aria-labelledby="nav-attributes-tab">
+
+                    <select id="layer" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Select Layer</option>
+                    </select>
+                    <br>
+
+                    <select id="attributes" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Select Attribute</option>
+                    </select>
+                    <br>
+
+                    <select id="operator" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Select Operator</option>
+                    </select>
+                    <br>
+
+                    <input type="text" class="form-control form-select-sm" id="value" placeholder="Enter Value"
+                        name="value">
+                    <br>
+                    <button id="load-layer" onclick="query()" type="button" style="margin-left:10px;"
+                        class="btn btn-danger btn-sm">Load Layer</button>
+                    <br><br>
+                </div>
+
+                <div class="tab-pane fade" id="nav-draw" role="tabpanel" aria-labelledby="nav-draw-tab">
+
+                    <select id="layer1" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Select Layer</option>
+                    </select>
+                    <br>
+
+                    <select id="draw_type" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option value="select">Select Shape</option>
+                        <option value="Square">Square</option>
+                        <option value="Box">Box</option>
+                        <option value="Polygon">Polygon</option>
+                        <option value="Star">Star</option>
+                        <option value="clear">Clear</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="table_data" style="font-size:15px;"></div>
+        <!------------------ query panel section end--------------------->
+
+        <!------------------ measure-options section start ----------------->
+        <div class="measure-options" id="measure-tab">
+            <span class="tab-cancel-icon"><i class="fas fa-times cancel-icon"></i></span>
+            <label for="layer" style="margin-left:15px;">Measure Options</label>
+            <button onclick="startLineString()"><b>Line String</b></button>
+            <button onclick="startPolygon()"><b>Polygon</b></button>
+            <button onclick="clearMeasurement()"><b>Clear Measurement</b></button>
+        </div>
+        <!------------------- measure-options section end ----------------->
+
+        <!-------------------- zone wise road filter start -------------------------->
+        <div id="road-filter" class="road-filter">
+            <ul>
+                <label style="margin-left:20px;"><b>Select Roads</b></label>
+                <li><a class="dropdown"> Aligarh All Roads &raquo;</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown" id="Type"
+                                onclick="updateAyodhyaRoadLayer('type'); updateNavBarWithFunctionName('Aligarh Road Category');">Road
+                                Category &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Major"><a class="dropdown-item"
+                                        onclick="Aligarh_TypeSub_cat('category','Local Street'); updateNavBarWithFunctionName('Aligarh Road Category Local Street');">Local
+                                        Street</a>
+                                </li>
+                                <li id="Minor"><a class="dropdown-item"
+                                        onclick="Aligarh_TypeSub_cat('category','Collector'); updateNavBarWithFunctionName('Aligarh Road Category Collector');">Collector</a>
+                                </li>
+                                <li id="Arterial"><a class="dropdown-item"
+                                        onclick="Aligarh_TypeSub_cat('category','Arterial'); updateNavBarWithFunctionName('Aligarh Road Category Arterial');">Arterial</a>
+                                </li>
+                                <li id="Subarterial"><a class="dropdown-item"
+                                        onclick="Aligarh_TypeSub_cat('category','Sub Arterial'); updateNavBarWithFunctionName('Aligarh Road Category Subarterial');">Subarterial</a>
+                                </li>
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_TypeSub_cat('category','NA'); updateNavBarWithFunctionName('Aligarh Road Category not define');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Condition"
+                                onclick="updateAyodhyaRoadLayer('condition'); updateNavBarWithFunctionName('Aligarh Road Condition');">
+                                Road Conditions &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Good"><a class="dropdown-item"
+                                        onclick="Aligarh_Condition_cat('condition','Good'); updateNavBarWithFunctionName('Aligarh Road Condition Good');">Good</a>
+                                </li>
+                                <li id="Moderate"><a class="dropdown-item"
+                                        onclick="Aligarh_Condition_cat('condition','Moderate'); updateNavBarWithFunctionName('Aligarh Road Condition Moderate');">Moderate</a>
+                                </li>
+                                <li id="Poor"><a class="dropdown-item"
+                                        onclick="Aligarh_Condition_cat('condition','Poor'); updateNavBarWithFunctionName('Aligarh Road Condition Poor');">Poor</a>
+                                </li>
+                                  <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Condition_cat('condition','NA'); updateNavBarWithFunctionName('Aligarh Road Condition NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Material"
+                                onclick="updateAyodhyaRoadLayer('material'); updateNavBarWithFunctionName('Aligarh Road Material');">Road
+                                Material &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Bitumen"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','Bitumen'); updateNavBarWithFunctionName('Aligarh Road Material Bitumen');">Bitumen</a>
+                                </li>
+                                <li id="BOE"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','BOE'); updateNavBarWithFunctionName('Aligarh Road Material BOE');">BOE</a>
+                                </li>
+                                <li id="CC"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','CC'); updateNavBarWithFunctionName('Aligarh Road Material CC');">CC</a>
+                                </li>
+                                <li id="Interlocking"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','Interlocking'); updateNavBarWithFunctionName('Aligarh Road Material Interlocking');">Interlocking</a>
+                                </li>
+                                <li id="Kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','Kachcha'); updateNavBarWithFunctionName('Aligarh Road Material Kachcha');">Kachcha</a>
+                                </li>
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Material_cat('material','NA'); updateNavBarWithFunctionName('Aligarh Road Material Not Define');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Ownership"
+                                onclick="updateAyodhyaRoadLayer('ownership'); updateNavBarWithFunctionName('Aligarh Road Ownership');">Road
+                                Ownership &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','NHAI'); updateNavBarWithFunctionName('Aligarh Road Ownership National Highways Authority of India');">NHAI
+                                    </a></li>
+                                <li id="ALGNN"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','Nagar Nigam'); updateNavBarWithFunctionName('Aligarh Road Ownership Aligarh Nagar Nigam');">Aligarh
+                                        Nagar Nigam
+                                    </a></li>
+                                <li id="Private Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','Private'); updateNavBarWithFunctionName('Aligarh Road Ownership Private Road');">Private
+                                        Road</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','PWD'); updateNavBarWithFunctionName('Aligarh Road Ownership PWD');">PWD
+                                    </a></li>
+                                <li id="Railway"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','Railway'); updateNavBarWithFunctionName('Aligarh Road Ownership Railway');">
+                                        Railway </a></li>
+                                <li id="Deparmental Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','Department Roads'); updateNavBarWithFunctionName('Aligarh Road Ownership Deparment Roads');">
+                                        Deparment Roads </a></li>
+                                <li id="Institutional Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','Institutional Roads'); updateNavBarWithFunctionName('Aligarh Road Ownership Institutional Roads');">
+                                        Institutional Roads </a></li>
+                                <li id="CM GRID"><a class="dropdown-item"
+                                        onclick="Aligarh_Ownership_cat('ownership','C.M GRID'); updateNavBarWithFunctionName('Aligarh Road Ownership CM GRID');">
+                                        C M GRID </a></li>
+                               
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="CUS"
+                                onclick="updateAyodhyaRoadLayer('cus'); updateNavBarWithFunctionName('Aligarh Road CUS');">
+                                Road CUS &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+
+                                <li id="Nagar_Nigam_Nidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','Nagar Nigam Nidhi'); updateNavBarWithFunctionName('Aligarh Road CUS Nagar Nigam Nidhi');">Nagar
+                                        Nigam Nidhi</a>
+
+                                <li id="VidhayakNidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','Vidhayak Nidhi'); updateNavBarWithFunctionName('Aligarh Road CUS Vidhayak Nidhi');">Vidhayak
+                                        Nidhi</a>
+                                </li>
+
+                                <li id="Jila Panchayat"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','Jila Panchayat'); updateNavBarWithFunctionName('Aligarh Road CUS Jila PANCHAYAT NIDHI');">Jila
+                                        PANCHAYAT NIDHI</a>
+                                </li>
+
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','P.W.D'); updateNavBarWithFunctionName('Aligarh Road CUS PWD');">PWD</a>
+                                </li>
+
+                                <li id="RES"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','RES'); updateNavBarWithFunctionName('Aligarh Road CUS RES');">RES</a>
+                                </li>
+
+                                <li id="SFC"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','SFC'); updateNavBarWithFunctionName('Aligarh Road CUS SFC');">SFC</a>
+                                </li>
+
+                                <li id="UPSLDA"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','UPSLDA'); updateNavBarWithFunctionName('Aligarh Road CUS UPSLDA');">UPSLDA</a>
+                                </li>
+
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','NHAI'); updateNavBarWithFunctionName('Aligarh Road CUS NHAI');">NHAI</a>
+                                </li>
+
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_CUS_cat('cus','NA'); updateNavBarWithFunctionName('Aligarh Road CUS NA');">NA</a>
+                                </li>
+                            
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="dropdown" id="Zone1"
+                        onclick="Aligarh_Zone_no('zone_no','1'); updateNavBarWithFunctionName('Zone1 Zone Road ');">
+                        Zone 1&raquo;</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown" id="Ward">Wards &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu ward-list">
+                                <li id="Ward10"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','10'); updateNavBarWithFunctionName('Ward 10 Road ');">Ward
+                                        10</a></li>
+                                <li id="Ward19"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','19'); updateNavBarWithFunctionName('Ward 19 Road ');">Ward
+                                        19</a></li>
+                                <li id="Ward24"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','24'); updateNavBarWithFunctionName('Ward 24 Road ');">Ward
+                                        24</a></li>
+                                <li id="Ward45"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','45'); updateNavBarWithFunctionName('Ward 45 Road ');">Ward
+                                        45</a></li>
+                                <li id="Ward46"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','46'); updateNavBarWithFunctionName('Ward 46 Road ');">Ward
+                                        46</a></li>
+                                <li id="Ward48"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','48'); updateNavBarWithFunctionName('Ward 48 Road ');">Ward
+                                        48</a></li>
+                                <li id="Ward49"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','49'); updateNavBarWithFunctionName('Ward 49 Road ');">Ward
+                                        49</a></li>
+                                <li id="Ward52"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','52'); updateNavBarWithFunctionName('Ward 52 Road ');">Ward
+                                        52</a></li>
+                                <li id="Ward55"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','55'); updateNavBarWithFunctionName('Ward 55 Road ');">Ward
+                                        55</a></li>
+                                <li id="Ward59"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','59'); updateNavBarWithFunctionName('Ward 59 Road ');">Ward
+                                        59</a></li>
+                                <li id="Ward61"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','61'); updateNavBarWithFunctionName('Ward 61 Road ');">Ward
+                                        61</a></li>
+                                <li id="Ward63"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','63'); updateNavBarWithFunctionName('Ward 63 Road ');">Ward
+                                        63</a></li>
+                                <li id="Ward64"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','64'); updateNavBarWithFunctionName('Ward 64 Road ');">Ward
+                                        64</a></li>
+                                <li id="Ward65"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','65'); updateNavBarWithFunctionName('Ward 65 Road ');">Ward
+                                        65</a></li>
+                                <li id="Ward70"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','70'); updateNavBarWithFunctionName('Ward 70 Road ');">Ward
+                                        70</a></li>
+                                <li id="Ward73"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','73'); updateNavBarWithFunctionName('Ward 73 Road ');">Ward
+                                        73</a></li>
+                                <li id="Ward74"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','74'); updateNavBarWithFunctionName('Ward 74 Road ');">Ward
+                                        74</a></li>
+                                <li id="Ward75"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','75'); updateNavBarWithFunctionName('Ward 75 Road ');">Ward
+                                        75</a></li>
+                                <li id="Ward79"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','79'); updateNavBarWithFunctionName('Ward 79 Road ');">Ward
+                                        79</a></li>
+                                <li id="Ward80"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','80'); updateNavBarWithFunctionName('Ward 80 Road ');">Ward
+                                        80</a></li>
+                                <li id="Ward81"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','81'); updateNavBarWithFunctionName('Ward 81 Road ');">Ward
+                                        81</a></li>
+                                <li id="Ward85"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','85'); updateNavBarWithFunctionName('Ward 85 Road ');">Ward
+                                        85</a></li>
+                                <li id="Ward88"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','88'); updateNavBarWithFunctionName('Ward 88 Road ');">Ward
+                                        88</a></li>
+                                <li id="Ward90"><a class="dropdown-item"
+                                        onclick="Aligarh_Ward_no('ward_no','90'); updateNavBarWithFunctionName('Ward 90 Road ');">Ward
+                                        90</a></li>
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a class="dropdown" id="AyodhayaDham_type"
+                                onclick="Aligarh_TypeSub_cat('zone_no','1'); updateNavBarWithFunctionName('Zone1 Type wise Road ');">Road
+                                Category&raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+
+                                <li id="Zone1_type_major"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('1','category','Local Street'); updateNavBarWithFunctionName('Zone1 Road Category Local Street');">Local
+                                        Street</a>
+                                </li>
+                                <li id="Zone1_type_Collector"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('1','category','Collector'); updateNavBarWithFunctionName('Zone1 Road Category Collector');">Collector</a>
+                                </li>
+                                <li id="Zone1_type_Arterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('1','category','Arterial'); updateNavBarWithFunctionName('Zone1 Road Category Arterial');">Arterial</a>
+                                </li>
+                                <li id="Zone1_type_Subarterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('1','category','Sub Arterial'); updateNavBarWithFunctionName('Zone1 Road Category Subarterial');">Subarterial</a>
+                                </li>
+                                <li id="Zone1_type_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('1','category','NA'); updateNavBarWithFunctionName('Zone1 Road Category NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone1_condition"
+                                onclick="Aligarh_Condition_cat('zone_no','1'); updateNavBarWithFunctionName('Zone1 Condition wise Road ');">
+                                Road Conditions &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone1_condition_good"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('1','condition','Good'); updateNavBarWithFunctionName('Zone1 Road Condition Good');">Good</a>
+                                </li>
+                                <li id="Zone1_condition_moderate"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('1','condition','Moderate'); updateNavBarWithFunctionName('Zone1 Road Condition Moderate');">Moderate</a>
+                                </li>
+                                <li id="Zone1_condition_poor"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('1','condition','Poor'); updateNavBarWithFunctionName('Zone1 Road Condition Poor');">Poor</a>
+                                </li>
+                                <li id="Zone1_condition_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('1','condition','NA'); updateNavBarWithFunctionName('Zone1 Road Condition NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone1_material"
+                                onclick="Aligarh_Material_cat('zone_no','1'); updateNavBarWithFunctionName('Zone1 Material wise Road ');">Road
+                                Material &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone1_material_bitumen"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','Bitumen'); updateNavBarWithFunctionName('Zone1 Road Material Bitumen');">Bitumen</a>
+                                </li>
+                                <li id="Zone1_material_BOE"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','BOE'); updateNavBarWithFunctionName('Zone1 Road Material BOE');">BOE</a>
+                                </li>
+                                <li id="Zone1_material_CC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','CC'); updateNavBarWithFunctionName('Zone1 Road Material CC');">CC</a>
+                                </li>
+                                <li id="Zone1_material_interlocking"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','Interlocking'); updateNavBarWithFunctionName('Zone1 Road Material Interlocking');">Interlocking</a>
+                                </li>
+                                <li id="Zone1_material_kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','Kachcha'); updateNavBarWithFunctionName('Zone1 Road Material Kachcha');">Kachcha</a>
+                                </li>
+                                <li id="Zone1_material_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('1','material','NA'); updateNavBarWithFunctionName('Zone1 Road Material NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone1_ownership"
+                                onclick="Aligarh_Ownership_cat('zone_no','1'); updateNavBarWithFunctionName('Zone1 Ownership wise Road ');">Road
+                                Ownership &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="ALGNN"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','Nagar Nigam'); updateNavBarWithFunctionName('Zone 1 Road Ownership Aligarh Nagar Nigam');">Aligarh
+                                        Nagar Nigam
+                                    </a></li>
+                                <li id="Private Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','Private'); updateNavBarWithFunctionName('Zone 1 Road Ownership Private Road');">Private
+                                        Road</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','PWD'); updateNavBarWithFunctionName('Zone 1 Road Ownership PWD');">PWD
+                                    </a></li>
+                                <li id="Railway"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','Railway'); updateNavBarWithFunctionName('Zone 1 Road Ownership Railway');">
+                                        Railway </a></li>
+                                <li id="Deparmental Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','Department Roads'); updateNavBarWithFunctionName('Zone 1 Road Ownership Deparment Roads');">
+                                        Deparment Roads </a></li>
+                                <li id="Institutional Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','Institutional Roads'); updateNavBarWithFunctionName('Zone 1 Road Ownership Institutional Roads');">
+                                        Institutional Roads </a></li>
+                                <li id="CM GRID"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('1','ownership','C.M GRID'); updateNavBarWithFunctionName('Zone 1 Road Ownership CM GRID');">
+                                        C M GRID </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="CUS"
+                                onclick="Aligarh_CUS_cat('zone_no','1'); updateNavBarWithFunctionName('Zone1 Road CUS');">
+                                Road CUS &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Nagar_Nigam_Nidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','Nagar Nigam Nidhi'); updateNavBarWithFunctionName('Zone-1 Road CUS Nagar Nigam Nidhi');">Nagar
+                                        Nigam Nidhi</a>
+
+                                <li id="VidhayakNidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','Vidhayak Nidhi'); updateNavBarWithFunctionName('Zone-1 Road CUS Vidhayak Nidhi');">Vidhayak
+                                        Nidhi</a>
+                                </li>
+
+                                <li id="Jila Panchayat"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','Jila Panchayat'); updateNavBarWithFunctionName('Zone-1 Road CUS Jila PANCHAYAT NIDHI');">Jila
+                                        PANCHAYAT NIDHI</a>
+                                </li>
+
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','P.W.D'); updateNavBarWithFunctionName('Zone-1 Road CUS PWD');">PWD</a>
+                                </li>
+
+                                <li id="RES"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','RES'); updateNavBarWithFunctionName('Zone-1 Road CUS RES');">RES</a>
+                                </li>
+
+                                <li id="SFC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','SFC'); updateNavBarWithFunctionName('Zone-1 Road CUS SFC');">SFC</a>
+                                </li>
+
+                                <li id="UPSLDA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','UPSLDA'); updateNavBarWithFunctionName('Zone-1 Road CUS UPSLDA');">UPSLDA</a>
+                                </li>
+
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('1','cus','NA'); updateNavBarWithFunctionName('Zone-1 Road CUS NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a id="Zone 2" class="dropdown"
+                        onclick="Aligarh_Zone_no('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Zone Road ');">
+                        Zone 2 &raquo;</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown" onclick="">Wards &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu ward-list">
+                                <li><a class="dropdown-item" id="Ward1"
+                                        onclick="Aligarh_Ward_no('ward_no','1'); updateNavBarWithFunctionName('Ward 1 Road ');">Ward
+                                        1</a></li>
+                                <li><a class="dropdown-item" id="Ward3"
+                                        onclick="Aligarh_Ward_no('ward_no','3'); updateNavBarWithFunctionName('Ward 3 Road ');">Ward
+                                        3</a></li>
+                                <li><a class="dropdown-item" id="Ward5"
+                                        onclick="Aligarh_Ward_no('ward_no','5'); updateNavBarWithFunctionName('Ward 5 Road ');">Ward
+                                        5</a></li>
+                                <li><a class="dropdown-item" id="Ward7"
+                                        onclick="Aligarh_Ward_no('ward_no','7'); updateNavBarWithFunctionName('Ward 7 Road ');">Ward
+                                        7</a></li>
+                                <li><a class="dropdown-item" id="Ward9"
+                                        onclick="Aligarh_Ward_no('ward_no','9'); updateNavBarWithFunctionName('Ward 9 Road ');">Ward
+                                        9</a></li>
+                                <li><a class="dropdown-item" id="Ward12"
+                                        onclick="Aligarh_Ward_no('ward_no','12'); updateNavBarWithFunctionName('Ward 12 Road ');">Ward
+                                        12</a></li>
+                                <li><a class="dropdown-item" id="Ward16"
+                                        onclick="Aligarh_Ward_no('ward_no','16'); updateNavBarWithFunctionName('Ward 16 Road ');">Ward
+                                        16</a></li>
+                                <li><a class="dropdown-item" id="Ward17"
+                                        onclick="Aligarh_Ward_no('ward_no','17'); updateNavBarWithFunctionName('Ward 17 Road ');">Ward
+                                        17</a></li>
+                                <li><a class="dropdown-item" id="Ward18"
+                                        onclick="Aligarh_Ward_no('ward_no','18'); updateNavBarWithFunctionName('Ward 18 Road ');">Ward
+                                        18</a></li>
+                                <li><a class="dropdown-item" id="Ward22"
+                                        onclick="Aligarh_Ward_no('ward_no','22'); updateNavBarWithFunctionName('Ward 22 Road ');">Ward
+                                        22</a></li>
+                                <li><a class="dropdown-item" id="Ward24"
+                                        onclick="Aligarh_Ward_no('ward_no','24'); updateNavBarWithFunctionName('Ward 24 Road ');">Ward
+                                        24</a></li>
+                                <li><a class="dropdown-item" id="Ward25"
+                                        onclick="Aligarh_Ward_no('ward_no','25'); updateNavBarWithFunctionName('Ward 25 Road ');">Ward
+                                        25</a></li>
+                                <li><a class="dropdown-item" id="Ward28"
+                                        onclick="Aligarh_Ward_no('ward_no','28'); updateNavBarWithFunctionName('Ward 28 Road ');">Ward
+                                        28</a></li>
+                                <li><a class="dropdown-item" id="Ward33"
+                                        onclick="Aligarh_Ward_no('ward_no','33'); updateNavBarWithFunctionName('Ward 33 Road ');">Ward
+                                        33</a></li>
+                                <li><a class="dropdown-item" id="Ward36"
+                                        onclick="Aligarh_Ward_no('ward_no','36'); updateNavBarWithFunctionName('Ward 36 Road ');">Ward
+                                        36</a></li>
+                                <li><a class="dropdown-item" id="Ward38"
+                                        onclick="Aligarh_Ward_no('ward_no','38'); updateNavBarWithFunctionName('Ward 38 Road ');">Ward
+                                        38</a></li>
+                                <li><a class="dropdown-item" id="Ward41"
+                                        onclick="Aligarh_Ward_no('ward_no','41'); updateNavBarWithFunctionName('Ward 41 Road ');">Ward
+                                        41</a></li>
+                                <li><a class="dropdown-item" id="Ward50"
+                                        onclick="Aligarh_Ward_no('ward_no','50'); updateNavBarWithFunctionName('Ward 50 Road ');">Ward
+                                        50</a></li>
+                                <li><a class="dropdown-item" id="Ward53"
+                                        onclick="Aligarh_Ward_no('ward_no','53'); updateNavBarWithFunctionName('Ward 53 Road ');">Ward
+                                        53</a></li>
+                                <li><a class="dropdown-item" id="Ward57"
+                                        onclick="Aligarh_Ward_no('ward_no','57'); updateNavBarWithFunctionName('Ward 57 Road ');">Ward
+                                        57</a></li>
+                                <li><a class="dropdown-item" id="Ward58"
+                                        onclick="Aligarh_Ward_no('ward_no','58'); updateNavBarWithFunctionName('Ward 58 Road ');">Ward
+                                        58</a></li>
+                                <li><a class="dropdown-item" id="Ward60"
+                                        onclick="Aligarh_Ward_no('ward_no','60'); updateNavBarWithFunctionName('Ward 60 Road ');">Ward
+                                        60</a></li>
+                                <li><a class="dropdown-item" id="Ward62"
+                                        onclick="Aligarh_Ward_no('ward_no','62'); updateNavBarWithFunctionName('Ward 62 Road ');">Ward
+                                        62</a></li>
+                                <li><a class="dropdown-item" id="Ward63"
+                                        onclick="Aligarh_Ward_no('ward_no','63'); updateNavBarWithFunctionName('Ward 63 Road ');">Ward
+                                        63</a></li>
+                                <li><a class="dropdown-item" id="Ward67"
+                                        onclick="Aligarh_Ward_no('ward_no','67'); updateNavBarWithFunctionName('Ward 67 Road ');">Ward
+                                        67</a></li>
+                                <li><a class="dropdown-item" id="Ward76"
+                                        onclick="Aligarh_Ward_no('ward_no','76'); updateNavBarWithFunctionName('Ward 76 Road ');">Ward
+                                        76</a></li>
+                                <li><a class="dropdown-item" id="Ward82"
+                                        onclick="Aligarh_Ward_no('ward_no','82'); updateNavBarWithFunctionName('Ward 82 Road ');">Ward
+                                        82</a></li>
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a id="Zone2_type" class="dropdown"
+                                onclick="Aligarh_Type_cat('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Type wise Road ');">Road
+                                Category&raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone2_type_major"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('2','category','Local Street'); updateNavBarWithFunctionName('Zone2 Road Category Local Street');">Local
+                                        Street</a>
+                                </li>
+                                <li id="Zone2_type_Collector"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('2','category','Collector'); updateNavBarWithFunctionName('Zone2 Road Category Collector');">Collector</a>
+                                </li>
+                                <li id="Zone2_type_Arterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('2','category','Arterial'); updateNavBarWithFunctionName('Zone2 Road Category Arterial');">Arterial</a>
+                                </li>
+                                <li id="Zone2_type_Subarterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('2','category','Sub Arterial'); updateNavBarWithFunctionName('Zone2 Road Category Subarterial');">Subarterial</a>
+                                </li>
+                                <li id="Zone2_type_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('2','category','NA'); updateNavBarWithFunctionName('Zone2 Road Category NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone2_condition"
+                                onclick="Aligarh_Condition_cat('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Condition wise Road ');">
+                                Road Conditions &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone2_condition_good"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('2','condition','Good'); updateNavBarWithFunctionName('Zone 2 Condition Good Road');">Good</a>
+                                </li>
+                                <li id="Zone2_condition_moderate"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('2','condition','Moderate'); updateNavBarWithFunctionName('Zone 2 Condition Moderate Road');">Moderate</a>
+                                </li>
+                                <li id="Zone2_condition_poor"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('2','condition','Poor'); updateNavBarWithFunctionName('Zone 2 Condition Poor Road');">Poor</a>
+                                </li>
+                                <li id="Zone2_condition_poor"><a class="dropdown-item"
+                                            onclick="Aligarh_Zone_Condition('2','condition','NA'); updateNavBarWithFunctionName('Zone 2 Condition NA');">NA</a>
+                                    </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone2_material"
+                                onclick="Aligarh_Material_cat('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Material wise Road ');">Road
+                                Material &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone2_material_bitumen"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','Bitumen'); updateNavBarWithFunctionName('Zone 2 Road Material Bitumen');">Bitumen</a>
+                                </li>
+                                <li id="Zone2_material_BOE"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','BOE'); updateNavBarWithFunctionName('Zone 2 Road Material BOE');">BOE</a>
+                                </li>
+                                <li id="Zone2_material_CC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','CC'); updateNavBarWithFunctionName('Zone 2 Road Material CC');">CC</a>
+                                </li>
+                                <li id="Zone2_material_interlocking"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','Interlocking'); updateNavBarWithFunctionName('Zone 2 Road Material Interlocking');">Interlocking</a>
+                                </li>
+                                <li id="Zone2_material_kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','Kachcha'); updateNavBarWithFunctionName('Zone 2 Road Material Kachcha');">Kachcha</a>
+                                </li>
+                                <li id="Zone2_material_kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('2','material','NA'); updateNavBarWithFunctionName('Zone 2 Road Material NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone2_ownership"
+                                onclick="Aligarh_Ownership_cat('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Ownership wise Road ');">Road
+                                Ownership &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('2','ownership','NHAI'); updateNavBarWithFunctionName('Zone 2 Road Ownership National Highways Authority of India');">NHAI
+                                    </a></li>
+                                <li id="ALGNN"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('2','ownership','Nagar Nigam'); updateNavBarWithFunctionName('Zone 2 Road Ownership Aligarh Nagar Nigam');">Aligarh
+                                        Nagar Nigam
+                                    </a></li>
+                                <li id="Private Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('2','ownership','Private'); updateNavBarWithFunctionName('Zone 2 Road Ownership Private Road');">Private
+                                        Road</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('2','ownership','PWD'); updateNavBarWithFunctionName('Zone 2 Road Ownership PWD');">PWD
+                                    </a></li>
+                             
+                                <li id="CM GRID"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('2','ownership','C.M GRID'); updateNavBarWithFunctionName('Zone 2 Road Ownership CM GRID');">
+                                        C M GRID </a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a class="dropdown" id="CUS"
+                                onclick="Aligarh_CUS_cat('zone_no','2'); updateNavBarWithFunctionName('Zone 2 Road CUS');">
+                                Road CUS &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Nagar_Nigam_Nidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','Nagar Nigam Nidhi'); updateNavBarWithFunctionName('Zone-2 Road CUS Nagar Nigam Nidhi');">Nagar
+                                        Nigam Nidhi</a>
+
+                                <li id="VidhayakNidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','Vidhayak Nidhi'); updateNavBarWithFunctionName('Zone-2 Road CUS Vidhayak Nidhi');">Vidhayak
+                                        Nidhi</a>
+                                </li>
+
+                              
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','P.W.D'); updateNavBarWithFunctionName('Zone-2 Road CUS PWD');">PWD</a>
+                                </li>
+
+                                <li id="RES"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','RES'); updateNavBarWithFunctionName('Zone-2 Road CUS RES');">RES</a>
+                                </li>
+
+                                <li id="SFC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','SFC'); updateNavBarWithFunctionName('Zone-2 Road CUS SFC');">SFC</a>
+                                </li>
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','NHAI'); updateNavBarWithFunctionName('Zone-2 Road CUS NHAI');">NHAI</a>
+                                </li>
+
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('2','cus','NA'); updateNavBarWithFunctionName('Zone-2 Road CUS NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a id="Zone3" class="dropdown"
+                        onclick="Aligarh_Zone_no('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Zone Road ');">
+                        Zone 3 &raquo;</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown" onclick="">Wards &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu ward-list">
+                                <li><a class="dropdown-item" id="Ward3"
+                                        onclick="Aligarh_Ward_no('ward_no','3'); updateNavBarWithFunctionName('Ward 3 Road ');">Ward
+                                        3</a></li>
+                                <li><a class="dropdown-item" id="Ward4"
+                                        onclick="Aligarh_Ward_no('ward_no','4'); updateNavBarWithFunctionName('Ward 4 Road ');">Ward
+                                        4</a></li>
+                                <li><a class="dropdown-item" id="Ward6"
+                                        onclick="Aligarh_Ward_no('ward_no','6'); updateNavBarWithFunctionName('Ward 6 Road ');">Ward
+                                        6</a></li>
+                                <li><a class="dropdown-item" id="Ward13"
+                                        onclick="Aligarh_Ward_no('ward_no','13'); updateNavBarWithFunctionName('Ward 13 Road ');">Ward
+                                        13</a></li>
+                                <li><a class="dropdown-item" id="Ward16"
+                                        onclick="Aligarh_Ward_no('ward_no','16'); updateNavBarWithFunctionName('Ward 16 Road ');">Ward
+                                        16</a></li>
+                                <li><a class="dropdown-item" id="Ward20"
+                                        onclick="Aligarh_Ward_no('ward_no','20'); updateNavBarWithFunctionName('Ward 20 Road ');">Ward
+                                        20</a></li>
+                                <li><a class="dropdown-item" id="Ward21"
+                                        onclick="Aligarh_Ward_no('ward_no','21'); updateNavBarWithFunctionName('Ward 21 Road ');">Ward
+                                        21</a></li>
+                                <li><a class="dropdown-item" id="Ward23"
+                                        onclick="Aligarh_Ward_no('ward_no','23'); updateNavBarWithFunctionName('Ward 23 Road ');">Ward
+                                        23</a></li>
+                                <li><a class="dropdown-item" id="Ward27"
+                                        onclick="Aligarh_Ward_no('ward_no','27'); updateNavBarWithFunctionName('Ward 27 Road ');">Ward
+                                        27</a></li>
+                                <li><a class="dropdown-item" id="Ward29"
+                                        onclick="Aligarh_Ward_no('ward_no','29'); updateNavBarWithFunctionName('Ward 29 Road ');">Ward
+                                        29</a></li>
+                                <li><a class="dropdown-item" id="Ward35"
+                                        onclick="Aligarh_Ward_no('ward_no','35'); updateNavBarWithFunctionName('Ward 35 Road ');">Ward
+                                        35</a></li>
+                                <li><a class="dropdown-item" id="Ward39"
+                                        onclick="Aligarh_Ward_no('ward_no','39'); updateNavBarWithFunctionName('Ward 39 Road ');">Ward
+                                        39</a></li>
+                                <li><a class="dropdown-item" id="Ward43"
+                                        onclick="Aligarh_Ward_no('ward_no','43'); updateNavBarWithFunctionName('Ward 43 Road ');">Ward
+                                        43</a></li>
+                                <li><a class="dropdown-item" id="Ward44"
+                                        onclick="Aligarh_Ward_no('ward_no','44'); updateNavBarWithFunctionName('Ward 44 Road ');">Ward
+                                        44</a></li>
+                                <li><a class="dropdown-item" id="Ward47"
+                                        onclick="Aligarh_Ward_no('ward_no','47'); updateNavBarWithFunctionName('Ward 47 Road ');">Ward
+                                        47</a></li>
+                                <li><a class="dropdown-item" id="Ward51"
+                                        onclick="Aligarh_Ward_no('ward_no','51'); updateNavBarWithFunctionName('Ward 51 Road ');">Ward
+                                        51</a></li>
+                                <li><a class="dropdown-item" id="Ward66"
+                                        onclick="Aligarh_Ward_no('ward_no','66'); updateNavBarWithFunctionName('Ward 66 Road ');">Ward
+                                        66</a></li>
+                                <li><a class="dropdown-item" id="Ward68"
+                                        onclick="Aligarh_Ward_no('ward_no','68'); updateNavBarWithFunctionName('Ward 68 Road ');">Ward
+                                        68</a></li>
+                                <li><a class="dropdown-item" id="Ward72"
+                                        onclick="Aligarh_Ward_no('ward_no','72'); updateNavBarWithFunctionName('Ward 72 Road ');">Ward
+                                        72</a></li>
+                                <li><a class="dropdown-item" id="Ward77"
+                                        onclick="Aligarh_Ward_no('ward_no','77'); updateNavBarWithFunctionName('Ward 77 Road ');">Ward
+                                        77</a></li>
+                                <li><a class="dropdown-item" id="Ward83"
+                                        onclick="Aligarh_Ward_no('ward_no','83'); updateNavBarWithFunctionName('Ward 83 Road ');">Ward
+                                        83</a></li>
+                                <li><a class="dropdown-item" id="Ward84"
+                                        onclick="Aligarh_Ward_no('ward_no','84'); updateNavBarWithFunctionName('Ward 84 Road ');">Ward
+                                        84</a></li>
+                                <li><a class="dropdown-item" id="Ward86"
+                                        onclick="Aligarh_Ward_no('ward_no','86'); updateNavBarWithFunctionName('Ward 86 Road ');">Ward
+                                        86</a></li>
+                                <li><a class="dropdown-item" id="Ward89"
+                                        onclick="Aligarh_Ward_no('ward_no','89'); updateNavBarWithFunctionName('Ward 89 Road ');">Ward
+                                        89</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone3_type"
+                                onclick="Aligarh_Type_cat('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Type wise Road ');">Road
+                                Category&raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone3_type_major"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('3','category','Local Street'); updateNavBarWithFunctionName('Zone3 Road Category Local Street');">Local
+                                        Street</a>
+                                </li>
+                                <li id="Zone3_type_Collector"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('3','category','Collector'); updateNavBarWithFunctionName('Zone3 Road Category Collector');">Collector</a>
+                                </li>
+                                <li id="Zone3_type_Arterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('3','category','Arterial'); updateNavBarWithFunctionName('Zone3 Road Category Arterial');">Arterial</a>
+                                </li>
+                                <li id="Zone3_type_Subarterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('3','category','Sub Arterial'); updateNavBarWithFunctionName('Zone3 Road Category Subarterial');">Subarterial</a>
+                                </li>
+                                <li id="Zone3_type_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('3','category','NA'); updateNavBarWithFunctionName('Zone3 Road Category NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone3_condition"
+                                onclick="Aligarh_Condition_cat('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Condition wise Road ');">
+                                Road Conditions &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone3_condition_good"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('3','condition','Good'); updateNavBarWithFunctionName('Zone 3 Condition Good Road');">Good</a>
+                                </li>
+                                <li id="Zone3_condition_moderate"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('3','condition','Moderate'); updateNavBarWithFunctionName('Zone 3 Condition Moderate Road');">Moderate</a>
+                                </li>
+                                <li id="Zone3_condition_poor"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('3','condition','Poor'); updateNavBarWithFunctionName('Zone 3 Condition Poor Road');">Poor</a>
+                                </li>
+                                <li id="Zone3_condition_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('3','condition','NA'); updateNavBarWithFunctionName('Zone 3 Condition NA ');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone3_material"
+                                onclick="Aligarh_Material_cat('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Material wise Road ');">Road
+                                Material &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone3_material_bitumen"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','Bitumen'); updateNavBarWithFunctionName('Zone 3 Material Bitumen Road');">Bitumen</a>
+                                </li>
+                                <li id="Zone3_material_BOE"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','BOE'); updateNavBarWithFunctionName('Zone 3 Material BOE Road');">BOE</a>
+                                </li>
+                                <li id="Zone3_material_CC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','CC'); updateNavBarWithFunctionName('Zone 3 Material CC Road');">CC</a>
+                                </li>
+                                <li id="Zone3_material_interlocking"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','Interlocking'); updateNavBarWithFunctionName('Zone 3 Material Interlocking Road');">Interlocking</a>
+                                </li>
+                                <li id="Zone3_material_kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','Kachcha')">Kachcha</a>
+                                </li>
+                                <li id="Zone3_material_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('3','material','NA')">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone3_ownership"
+                                onclick="Aligarh_Ownership_cat('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Ownership wise Road ');">Road
+                                Ownership &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('3','ownership','NHAI'); updateNavBarWithFunctionName('Zone 3 Road Ownership National Highways Authority of India');">NHAI
+                                    </a></li>
+                                <li id="ALGNN"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('3','ownership','Nagar Nigam'); updateNavBarWithFunctionName('Zone 3 Road Ownership Aligarh Nagar Nigam');">Aligarh
+                                        Nagar Nigam
+                                    </a></li>
+                                <li id="Private Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('3','ownership','Private'); updateNavBarWithFunctionName('Zone 3 Road Ownership Private Road');">Private
+                                        Road</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('3','ownership','PWD'); updateNavBarWithFunctionName('Zone 3 Road Ownership PWD');">PWD
+                                    </a></li>
+                               
+                                <li id="CM GRID"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('3','ownership','C.M GRID'); updateNavBarWithFunctionName('Zone 3 Road Ownership CM GRID');">
+                                        C M GRID </a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="CUS"
+                                onclick="Aligarh_CUS_cat('zone_no','3'); updateNavBarWithFunctionName('Zone 3 Zone CUS');">
+                                Road CUS &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Nagar_Nigam_Nidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','Nagar Nigam Nidhi'); updateNavBarWithFunctionName('Zone-3 Road CUS Nagar Nigam Nidhi');">Nagar
+                                        Nigam Nidhi</a>
+
+                                <li id="VidhayakNidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','Vidhayak Nidhi'); updateNavBarWithFunctionName('Zone-3 Road CUS Vidhayak Nidhi');">Vidhayak
+                                        Nidhi</a>
+                                </li>
+
+                               
+
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','P.W.D'); updateNavBarWithFunctionName('Zone-3 Road CUS PWD');">PWD</a>
+                                </li>
+
+                                <li id="RES"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','RES'); updateNavBarWithFunctionName('Zone-3 Road CUS RES');">RES</a>
+                                </li>
+
+                                <li id="SFC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','SFC'); updateNavBarWithFunctionName('Zone-3 Road CUS SFC');">SFC</a>
+                                </li>
+
+                              
+                                <li id="NHAI"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','NHAI'); updateNavBarWithFunctionName('Zone-3 Road CUS NHAI');">NHAI</a>
+                                </li>
+
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('3','cus','NA'); updateNavBarWithFunctionName('Zone-3 Road CUS NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a id="Zone4" class="dropdown"
+                        onclick="Aligarh_Zone_no('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Zone Road ');">
+                        Zone 4 &raquo;</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown" onclick="">Wards &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu ward-list">
+                                <li><a class="dropdown-item" id="Ward2"
+                                        onclick="Aligarh_Ward_no('ward_no','2'); updateNavBarWithFunctionName('Ward 2 Road ');">Ward
+                                        2</a></li>
+                                <li><a class="dropdown-item" id="Ward8"
+                                        onclick="Aligarh_Ward_no('ward_no','8'); updateNavBarWithFunctionName('Ward 8 Road ');">Ward
+                                        8</a></li>
+                                <li><a class="dropdown-item" id="Ward10"
+                                        onclick="Aligarh_Ward_no('ward_no','10'); updateNavBarWithFunctionName('Ward 10 Road ');">Ward
+                                        10</a></li>
+                                <li><a class="dropdown-item" id="Ward11"
+                                        onclick="Aligarh_Ward_no('ward_no','11'); updateNavBarWithFunctionName('Ward 11 Road ');">Ward
+                                        11</a></li>
+                                <li><a class="dropdown-item" id="Ward14"
+                                        onclick="Aligarh_Ward_no('ward_no','14'); updateNavBarWithFunctionName('Ward 14 Road ');">Ward
+                                        14</a></li>
+                                <li><a class="dropdown-item" id="Ward15"
+                                        onclick="Aligarh_Ward_no('ward_no','15'); updateNavBarWithFunctionName('Ward 15 Road ');">Ward
+                                        15</a></li>
+                                <li><a class="dropdown-item" id="Ward19"
+                                        onclick="Aligarh_Ward_no('ward_no','19'); updateNavBarWithFunctionName('Ward 19 Road ');">Ward
+                                        19</a></li>
+                                <li><a class="dropdown-item" id="Ward26"
+                                        onclick="Aligarh_Ward_no('ward_no','26'); updateNavBarWithFunctionName('Ward 26 Road ');">Ward
+                                        26</a></li>
+                                <li><a class="dropdown-item" id="Ward30"
+                                        onclick="Aligarh_Ward_no('ward_no','30'); updateNavBarWithFunctionName('Ward 30 Road ');">Ward
+                                        30</a></li>
+                                <li><a class="dropdown-item" id="Ward31"
+                                        onclick="Aligarh_Ward_no('ward_no','31'); updateNavBarWithFunctionName('Ward 31 Road ');">Ward
+                                        31</a></li>
+                                <li><a class="dropdown-item" id="Ward32"
+                                        onclick="Aligarh_Ward_no('ward_no','32'); updateNavBarWithFunctionName('Ward 32 Road ');">Ward
+                                        32</a></li>
+                                <li><a class="dropdown-item" id="Ward34"
+                                        onclick="Aligarh_Ward_no('ward_no','34'); updateNavBarWithFunctionName('Ward 34 Road ');">Ward
+                                        34</a></li>
+                                <li><a class="dropdown-item" id="Ward37"
+                                        onclick="Aligarh_Ward_no('ward_no','37'); updateNavBarWithFunctionName('Ward 37 Road ');">Ward
+                                        37</a></li>
+                                <li><a class="dropdown-item" id="Ward40"
+                                        onclick="Aligarh_Ward_no('ward_no','40'); updateNavBarWithFunctionName('Ward 40 Road ');">Ward
+                                        40</a></li>
+                                <li><a class="dropdown-item" id="Ward42"
+                                        onclick="Aligarh_Ward_no('ward_no','42'); updateNavBarWithFunctionName('Ward 42 Road ');">Ward
+                                        42</a></li>
+                                <li><a class="dropdown-item" id="Ward54"
+                                        onclick="Aligarh_Ward_no('ward_no','54'); updateNavBarWithFunctionName('Ward 54 Road ');">Ward
+                                        54</a></li>
+                                <li><a class="dropdown-item" id="Ward56"
+                                        onclick="Aligarh_Ward_no('ward_no','56'); updateNavBarWithFunctionName('Ward 56 Road ');">Ward
+                                        56</a></li>
+                                <li><a class="dropdown-item" id="Ward60"
+                                        onclick="Aligarh_Ward_no('ward_no','60'); updateNavBarWithFunctionName('Ward 60 Road ');">Ward
+                                        60</a></li>
+                                <li><a class="dropdown-item" id="Ward65"
+                                        onclick="Aligarh_Ward_no('ward_no','65'); updateNavBarWithFunctionName('Ward 65 Road ');">Ward
+                                        65</a></li>
+                                <li><a class="dropdown-item" id="Ward68"
+                                        onclick="Aligarh_Ward_no('ward_no','68'); updateNavBarWithFunctionName('Ward 68 Road ');">Ward
+                                        68</a></li>
+                                <li><a class="dropdown-item" id="Ward69"
+                                        onclick="Aligarh_Ward_no('ward_no','69'); updateNavBarWithFunctionName('Ward 69 Road ');">Ward
+                                        69</a></li>
+                                <li><a class="dropdown-item" id="Ward70"
+                                        onclick="Aligarh_Ward_no('ward_no','70'); updateNavBarWithFunctionName('Ward 70 Road ');">Ward
+                                        70</a></li>
+                                <li><a class="dropdown-item" id="Ward71"
+                                        onclick="Aligarh_Ward_no('ward_no','71'); updateNavBarWithFunctionName('Ward 71 Road ');">Ward
+                                        71</a></li>
+                                <li><a class="dropdown-item" id="Ward78"
+                                        onclick="Aligarh_Ward_no('ward_no','78'); updateNavBarWithFunctionName('Ward 78 Road ');">Ward
+                                        78</a></li>
+                                <li><a class="dropdown-item" id="Ward86"
+                                        onclick="Aligarh_Ward_no('ward_no','86'); updateNavBarWithFunctionName('Ward 86 Road ');">Ward
+                                        86</a></li>
+                                <li><a class="dropdown-item" id="Ward87"
+                                        onclick="Aligarh_Ward_no('ward_no','87'); updateNavBarWithFunctionName('Ward 87 Road ');">Ward
+                                        87</a></li>
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone4_type"
+                                onclick="Aligarh_Type_cat('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Type wise Road ');">Road
+                                Category&raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone4_type_major"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('4','category','Local Street'); updateNavBarWithFunctionName('Zone4 Road Category Local Street');">Local
+                                        Street</a>
+                                </li>
+                                <li id="Zone4_type_Collector"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('4','category','Collector'); updateNavBarWithFunctionName('Zone4 Road Category Collector');">Collector</a>
+                                </li>
+                                <li id="Zone4_type_Arterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('4','category','Arterial'); updateNavBarWithFunctionName('Zone4 Road Category Arterial');">Arterial</a>
+                                </li>
+                                <li id="Zone4_type_Subarterial"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('4','category','Sub Arterial'); updateNavBarWithFunctionName('Zone4 Road Category Subarterial');">Subarterial</a>
+                                </li>
+                                <li id="Zone4_type_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_TypeSub('4','category','NA'); updateNavBarWithFunctionName('Zone4 Road Category NA');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone4_condition"
+                                onclick="Aligarh_Condition_cat('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Condition wise Road ');">
+                                Road Conditions &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone4_condition_good"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('4','condition','Good'); updateNavBarWithFunctionName('Zone 4 Condition Good Road');">Good</a>
+                                </li>
+                                <li id="Zone4_condition_moderate"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('4','condition','Moderate'); updateNavBarWithFunctionName('Zone 4 Condition Moderate Road');">Moderate</a>
+                                </li>
+                                <li id="Zone4_condition_poor"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('4','condition','Poor'); updateNavBarWithFunctionName('Zone 4 Condition Poor Road');">Poor</a>
+                                </li>
+                                <li id="Zone4_condition_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Condition('4','condition','NA'); updateNavBarWithFunctionName('Zone 4 Condition NA Road');">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone4_material"
+                                onclick="Aligarh_Material_cat('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Material wise Road ');">Road
+                                Material &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Zone4_material_bitumen"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','Bitumen'); updateNavBarWithFunctionName('Zone 4 Material Bitumen Road');">Bitumen</a>
+                                </li>
+                                <li id="Zone4_material_BOE"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','BOE'); updateNavBarWithFunctionName('Zone 4 Material BOE Road');">BOE</a>
+                                </li>
+                                <li id="Zone4_material_CC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','CC'); updateNavBarWithFunctionName('Zone 4 Material CC Road');">CC</a>
+                                </li>
+                                <li id="Zone4_material_interlocking"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','Interlocking'); updateNavBarWithFunctionName('Zone 4 Material Interlocking Road');">Interlocking</a>
+                                </li>
+                                <li id="Zone4_material_kachcha"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','Kachcha')">Kachcha</a>
+                                </li>
+                                <li id="Zone4_material_NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Material('4','material','NA')">NA</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="Zone4_ownership"
+                                onclick="Aligarh_Ownership_cat('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Ownership wise Road ');">Road
+                                Ownership &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                               
+                                <li id="ALGNN"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('4','ownership','Nagar Nigam'); updateNavBarWithFunctionName('Zone 4 Road Ownership Aligarh Nagar Nigam');">Aligarh
+                                        Nagar Nigam
+                                    </a></li>
+                                <li id="Private Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('4','ownership','Private'); updateNavBarWithFunctionName('Zone 4 Road Ownership Private Road');">Private
+                                        Road</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('4','ownership','PWD'); updateNavBarWithFunctionName('Zone 4 Road Ownership PWD');">PWD
+                                    </a></li>
+                                
+                                <li id="Deparmental Road"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('4','ownership','Department Roads'); updateNavBarWithFunctionName('Zone 4 Road Ownership Department Roads');">
+                                        Department Roads </a></li>
+                                
+                                <li id="CM GRID"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_Ownership('4','ownership','C.M GRID'); updateNavBarWithFunctionName('Zone 4 Road Ownership CM GRID');">
+                                        C M GRID </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown" id="CUS"
+                                onclick="Aligarh_CUS_cat('zone_no','4'); updateNavBarWithFunctionName('Zone 4 Road CUS');">
+                                Road CUS &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li id="Nagar_Nigam_Nidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','Nagar Nigam Nidhi'); updateNavBarWithFunctionName('Zone-4 Road CUS Nagar Nigam Nidhi');">Nagar
+                                        Nigam Nidhi</a>
+                                <li id="VidhayakNidhi"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','Vidhayak Nidhi'); updateNavBarWithFunctionName('Zone-4 Road CUS Vidhayak Nidhi');">Vidhayak
+                                        Nidhi</a>
+                                </li>
+                                <li id="PWD"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','P.W.D'); updateNavBarWithFunctionName('Zone-4 Road CUS PWD');">PWD</a>
+                                </li>
+
+                                <li id="RES"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','RES'); updateNavBarWithFunctionName('Zone-4 Road CUS RES');">RES</a>
+                                </li>
+
+                                <li id="SFC"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','SFC'); updateNavBarWithFunctionName('Zone-4 Road CUS SFC');">SFC</a>
+                                </li>
+                                <li id="NA"><a class="dropdown-item"
+                                        onclick="Aligarh_Zone_CUS('4','cus','NA'); updateNavBarWithFunctionName('Zone-4 Road CUS NA');">NA</a>
+                                </li>
+                            </ul>
+                        </ul>
+                </li>
+            </ul>
+        </div>
+        <!-------------------- zone wise road filter end -------------------------->
+
+        <!-----------------Legend btn code--------------->
+        <div class="legend-tab">
+            <div id="live_legend" style="display: none;">
+                <h6>Legend</h6>
+            </div>
+
+            <div id="Condition_legend" Class="Legend_panel">
+                <h6>Legend By Condition</h6>
+                <ul>
+                    <li><span
+                            style="background-color: #139d2c; width: 20px; height: 2px; display: inline-block;"></span>
+                        Good Road</li>
+                    <li><span
+                            style="background-color: #e2e832; width: 20px; height: 2px; display: inline-block;"></span>
+                        Moderate Road</li>
+                    <li><span
+                            style="background-color: #e33232; width: 20px; height: 2px; display: inline-block;"></span>
+                        Poor Road</li>
+
+                    <li><span
+                            style="background-color: #eb58bf; width: 20px; height: 2px; display: inline-block;"></span>
+                        NA</li>
+
+                    <!-- Add more legend items as needed -->
+                </ul>
+            </div>
+            <div id="CUS_legend" Class="Legend_panel">
+                <h6>Legend By CUS</h6>
+                <ul>
+                    <li><span
+                            style="background-color: #ec1248; width: 20px; height: 2px; display: inline-block;"></span>
+                        14th Finance</li>
+                    <li><span
+                            style="background-color: #e63dee; width: 20px; height: 2px; display: inline-block;"></span>
+                        15th Finance</li>
+                    <li><span
+                            style="background-color: #14cee3; width: 20px; height: 2px; display: inline-block;"></span>
+                        Nagar Nigam Nidhi</li>
+
+                    <li><span
+                            style="background-color: #e1ca4c; width: 20px; height: 2px; display: inline-block;"></span>
+                        Others</li>
+
+                    <!-- Add more legend items as needed -->
+                </ul>
+            </div>
+            <div id="Material_legend" Class="Legend_panel">
+                <h6>Legend By Material</h6>
+                <ul>
+                    <li><span
+                            style="background-color: rgb(117, 14, 14); width: 20px; height: 2px; display: inline-block;"></span>
+                        Bitumen Road</li>
+                    <li><span
+                            style="background-color: #1ad7b0; width: 20px; height: 2px; display: inline-block;"></span>
+                        CC Road</li>
+                    <li><span
+                            style="background-color: #2392ed; width: 20px; height: 2px; display: inline-block;"></span>
+                        Interlocking Road</li>
+
+                    <li><span
+                            style="background-color: #6036d0; width: 20px; height: 2px; display: inline-block;"></span>
+                        Kachcha Road</li>
+                    <li><span
+                            style="background-color: #f228ab; width: 20px; height: 2px; display: inline-block;"></span>
+                        BOE Road</li>
+                    <li><span
+                            style="background-color: #dfc223; width: 20px; height: 2px; display: inline-block;"></span>
+                        N/A</li>
+                   
+                    <!-- Add more legend items as needed -->
+                </ul>
+            </div>
+            <div id="Ownership_legend" Class="Legend_panel">
+                <h6>Legend By Ownership</h6>
+                <ul>
+                    <li><span
+                            style="background-color: #335bee; width: 20px; height: 2px; display: inline-block;"></span>
+                        NHAI</li>
+                    <li><span
+                            style="background-color: #69e70f; width: 20px; height: 2px; display: inline-block;"></span>
+                        PWD</li>
+                    <li><span
+                            style="background-color: #ec2020; width: 20px; height: 2px; display: inline-block;"></span>
+                        Private Roads</li>
+
+                    <li><span
+                            style="background-color: #c3c922; width: 20px; height: 2px; display: inline-block;"></span>
+                        Railway </li>
+                    <li><span
+                            style="background-color: #5aeee5; width: 20px; height: 2px; display: inline-block;"></span>
+                        KNN</li>
+                    <li><span
+                            style="background-color: #f16a16; width: 20px; height: 2px; display: inline-block;"></span>
+                        KDA</li>
+                    <li><span
+                            style="background-color: #eec82e; width: 20px; height: 2px; display: inline-block;"></span>
+                        Defence</li>
+                    <li><span
+                            style="background-color: #8d139b; width: 20px; height: 2px; display: inline-block;"></span>
+                        Department Road</li>
+                    <li><span
+                            style="background-color: #168de7; width: 20px; height: 2px; display: inline-block;"></span>
+                        Institutional Road</li>
+                    <li><span
+                            style="background-color: #831042; width: 20px; height: 2px; display: inline-block;"></span>
+                        Others</li>
+                    <!-- Add more legend items as needed -->
+                </ul>
+            </div>
+            <div id="RoadCategory_legend" Class="Legend_panel">
+                <h6>Legend By Road Category</h6>
+                <ul>
+                    <li><span
+                            style="background-color: #14cee3; width: 20px; height: 2px; display: inline-block;"></span>
+                        Local Street</li>
+                    <li><span
+                            style="background-color: #e63dee; width: 20px; height: 2px; display: inline-block;"></span>
+                        Collector</li>
+                    <li><span
+                            style="background-color: #ec1248; width: 20px; height: 2px; display: inline-block;"></span>
+                        Expressway</li>
+                    <li><span
+                            style="background-color: #83e45c; width: 20px; height: 2px; display: inline-block;"></span>
+                        Sub Arterial</li>
+                    <li><span
+                            style="background-color: #e1ca4c; width: 20px; height: 2px; display: inline-block;"></span>
+                        Arterial</li>
+
+                    <!-- Add more legend items as needed -->
+                </ul>
+            </div>
+        </div>
+
+
+        <!--------spping boot live Road Table data getting----->
+        <div id="tableContainer_summary">
+            <!-- Navigation Bar -->
+            <nav class="feature_nav">
+                <a style="color: rgb(244, 239, 239); margin-right: 20px; font-size: 15px;">Feature Name - </a>
+                <a id="featureName" class="feature_name1"
+                    style="color: rgb(243, 236, 236); margin-left: 8px;text-decoration: none;"></a>
+                <div style="display: flex; align-items: center; margin-left: auto;">
+                    <i class="fa-solid fa-print" style="margin-right: 10px;color: rgb(243, 236, 236);"></i>
+                    <i class="fas fa-window-minimize" onclick="minimize1()"
+                        style="margin-right: 10px;color: rgb(243, 236, 236);"></i>
+                    <i class="fas fa-window-maximize" onclick="maximize1()"
+                        style="margin-right: 10px;color: rgb(243, 236, 236);"></i>
+                    <span class="table-cancel-btn1" style="color: rgb(243, 236, 236);">
+                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+                    </span>
+                </div>
+            </nav>
+            <table id="dataTable_summary">
+                <thead>
+                    <tr>
+                        <th> Gis Id </th>
+                        <th> Zone No </th>
+                        <th> Zone Name </th>
+                        <th> Ward No </th>
+                        <th> Ward Name </th>
+                        <th> Ownership </th>
+                        <th> Road Category </th>
+                        <th> Road Name </th>
+                        <th> Row (meter) </th>
+                        <th> Row as per </th>
+                        <th> carriage Width </th>
+                        <th> Material </th>
+                        <th> Length (km) </th>
+                        <th> condition </th>
+                        <th> Year Of Construction </th>
+                        <th> CUS &nbsp;&nbsp;
+                           
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody id="dataBody_summary">
+
+                </tbody>
+            </table>
+        </div>
+        <!----------------------Road Age Table----------------->
+
+        <!--------wms & wfs Road Table data getting layer----->
+        <div id="tableContainer_summaryfilter">
+            <nav class="feature_nav">
+                <a style="color: rgb(244, 239, 239); margin-right: 20px; font-size: 15px;">Filter Data According to zone
+                    and Column </a>
+                <a id="featureName" style="color: rgb(243, 236, 236); margin-left: 8px;text-decoration: none;"></a>
+                <div style="display: flex; align-items: center; margin-left: auto;">
+                    <i class="fas fa-window-minimize" onclick="minimize1()"
+                        style="margin-right: 10px;color: rgb(243, 236, 236);"></i>
+                    <i class="fas fa-window-maximize" onclick="maximize1()"
+                        style="margin-right: 10px;color: rgb(243, 236, 236);"></i>
+                    <span class="table-cancel-btn1" style="color: rgb(243, 236, 236);">
+                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+                    </span>
+                </div>
+            </nav>
+            <table id="dataTable_summaryfilter">
+                <thead>
+                    <tr>
+                        <th> Gis Id </th>
+                        <th> Zone No
+                            <select class="zone-dropdown" style="overflow-y:scroll" id="zoneSelect"></select>
+                        </th>
+                        <th> Zone Name </th>
+                        <th> Ward No
+                            <select class="ward-dropdown" style="overflow-y:scroll" id="wardSelect"></select>
+                            </select>
+                        </th>
+                        <th> Ward Name </th>
+                        <th> Ownership
+                            <select class="ownership-dropdown">
+                                <option value="">Ownership</option>
+                                <option value="KNN">KNN</option>
+                                <option value="Private Roads">PVT</option>
+                                <option value="NHAI">NHAI</option>
+                                <option value="PWD">PWD</option>
+                                <option value="Railway">Railway</option>
+                                <option value="KDA">KDA</option>
+                                <option value="Defence">Defence</option>
+                                <option value="Department Roads">Department Roads</option>
+                                <option value="Institutional Roads">Institutional Roads</option>
+                                <option value="Others">Others</option>
+                                <!-- Add more ownership options here -->
+                            </select>
+                        </th>
+                       
+                        <th> Road Category </th>
+                        <th> Road Name </th>
+                        <th> Row (meter) </th>
+                        <th> Row as per </th>
+                        <th> carriage Width </th>
+                        <th> Material
+                            <select class="material-dropdown">
+                                <option value="">Material</option>
+                                <option value="Kachcha">Kachcha</option>
+                                <option value="Bitumen">Bitumen</option>
+                                <option value="CC">CC (Concrete)</option>
+                                <option value="Interlocking">Interlocking</option>
+                                <option value="BOE">BOE</option>
+                            </select>
+                        </th>
+                        <th> Length (km) </th>
+                        <th> condition
+                          
+                        </th>
+                        <th> Year Of Construction </th>
+                        <th> CUS &nbsp;&nbsp;
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody_summaryfilter">
+                </tbody>
+            </table>
+        </div>
+
+
+        <!------------------------ live table end --------------------->
+        <!-- Your HTML content -->
+        <div id="popup" class="ol-popup"> </div>
+
+
+        <!-- popup for park polygon  -->
+        <div id="popup_1" class="popup_1"></div>
+
+
+        <!------------------------- summary table start ------------------->
+        <div class="table_summary" id="summary-table">
+            <div class="topnav" id="topnav">
+                <div class="nav-links">
+                    <a href="#Summary" id="summary_id" onclick="navigateTo('Summary')">Summary</a>
+                    <!-- Zones Dropdown -->
+                    <div class="dropdown">
+                        <a href="#Zones" class="dropbtn">Zones</a>
+                        <div class="dropdown-content" id="zonesDropdown">
+                            <!-- Dropdown content will be dynamically inserted here -->
+
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#Wards" class="dropbtn">Wards</a>
+                        <div class="dropdown-content" id="zonesDropdownwards">
+                            <!-- Dropdown content will be dynamically inserted here -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-window-minimize" onclick="minimize()"></i>
+                    <i class="fas fa-window-maximize" onclick="maximize()"></i>
+                    <i class="fas fa-window-close" onclick="closeNav()"></i>
+                </div>
+            </div>
+            <div class="content-wrapper" id="content-wrapper">
+                <div id="content" class="card-container">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!------------------------ summary table end --------------------->
+
+    </div>
+    <!------------------------ main-container section end ---------------------->
+
+    <!----------------------- footer section start ---------------------------->
+    <div class="footer">
+        &copy; 2024 UP Remote Sensing Application Centre. All rights reserved.
+    </div>
+    <!---------------------- footer section end -------------------------------->
+    <script src="../config.js"></script>
+    <script src="../javascript/Aligarh.js"></script>
+
+
+</body>
+
+</html>

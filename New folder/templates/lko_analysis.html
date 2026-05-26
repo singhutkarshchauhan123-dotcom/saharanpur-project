@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucknow</title>
+
+    <link href="/libs/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/v6.13.0-dist/ol.css">
+    <link rel="stylesheet" href="/libs/ol-layerswitcher-master/dist/ol-layerswitcher.css" />
+    <link rel="stylesheet" href="/libs/ol-geocoder/ol-geocoder.css" />
+    <!-- <link rel="stylesheet" href="/libs/ol-popup/ol-popup.css"/> -->
+    <link rel="stylesheet" href="/libs/jquery-ui-1.12.1/jquery-ui.css">
+
+    <script src="/libs/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/libs/jquery.js"></script>
+    <script src="/libs/v6.13.0-dist/ol.js"></script>
+    <script src="/libs/ol-layerswitcher-master/dist/ol-layerswitcher.js"></script>
+    <script src="/libs/ol-geocoder/ol-geocoder.js"></script>
+    <script src="/libs/ol-popup/ol-popup.js"></script>
+    <script src="/libs/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="/libs/jquery-ui-1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" class="fabicon" href="../assets/icons/logo_tree.png" />
+
+
+    <link rel="stylesheet" href="../style/lko_analysis.css">
+    <link rel="stylesheet" href="../style/responsive.css">
+
+</head>
+
+<body>
+    <!---------------------- header section start -------------------------->
+    <div class="header">
+       
+     
+        <div class="center-content">
+            <img src="../assets/logo/lko.png" class="logo" alt="" />
+            <h2 class="title">Lucknow Nagar Nigam</h2>
+            <img src="../assets/logo/images.jpg" class="logo" alt="dp" />
+			<img src="../assets/logo/UP_logo.png" class="logo1" alt="dp" />
+        </div>
+
+<button class="back-icon" title="Back">
+				    <i class="fa fa-arrow-circle-left"></i>
+				</button>
+        <!-- <div class="search-bar" id="search-bar">
+      <input type="text" placeholder="Search...">
+      <button id="search"><i class="fa fa-search"></i></button>
+  </div> -->
+    </div>
+    <!---------------------- header section end -------------------------->
+
+
+
+
+
+    <!---------------------- main-container section start -------------------------->
+    <div class="main-container">
+
+        <!---------------------- map section start ------------------>
+        <div id="map">
+            <div class="map-icons-left">
+                <button class="map-icon" id="StreetLight_Roads" title="Street Light" onclick="onAnalysisButtonClick('Street Light'),toggleSummaryTable(), street_light(),showIframe('Street_light_frame')">
+                    <!-- <img src="logo/12400884.png" class="logo1" alt="" /> -->
+                    <i class="fa-regular fa-lightbulb"></i>
+                </button>
+              <!--  <h6 class="h6">Street Light</h6>-->
+        
+                <button class="map-icon" id="Development_Zones" title="Underdeveloped Zones" onclick="onAnalysisButtonClick('Development Zones'),toggleSummaryTable(),Show_AllLayer_Devloped(),undeveloped_zones1(), undeveloped_zones(),showIframe('undeveloped_frame')">
+                    <i class="fa-solid fa-road"></i>
+                </button>
+              <!--   <h6 class="h6">Underdeveloped Zones</h6>  -->
+        
+                <button class="map-icon" id="Encroachment" title="Road Maintenance" onclick="onAnalysisButtonClick('Road Maintenance'),toggleSummaryTable(),Show_AllLayer_Maintenance(),road_maintenance(),Maintenance_zones1(),showIframe('maintenance_frame')">
+                    <i class="fa-solid fa-screwdriver"></i>
+                </button>
+              <!--   <h6 class="h6">Road Maintenance</h6>  -->
+            </div>
+
+
+<!-- ======================================================================================================= -->
+
+
+            <div id="legendContainer" class="legend-container" style="display: none;">
+                <h4>Legend</h4>
+                <ul id="legendContent"></ul>
+              </div>
+              
+
+
+<!-- ============================================================================================================= -->
+
+
+
+            <div class="map-icons">
+                <!-- <button class="map-icon" id="search-icon" title="Search"><i class="fas fa-search"></i></button>
+                <h6 class="h6"> Search </h6> -->
+               
+                <button class="map-icon" id="basemap-icon" title="Encroachment" onclick=" onAnalysisButtonClick('Encroachment') ,EncroachmentRoads(), toggleSummaryTable(), encroachment(), showIframe('encroached_frame')" >
+                    <i class="fa-solid fa-building-user"></i></button> 
+                   <!--   <h6 class="h6">Encroachment </h6>  -->
+
+                <!-- 
+                <button class="map-icon" id="table_icon" title="Summary Data" onclick="toggleSummaryTable(), zone_dashboard(), showIframe('iframe6')"><i
+                        class="fas fa-table "></i></button>
+                <h6 class="h6">Zone Dashboard </h6> -->
+                
+                <button class="map-icon" id="clear-icon" title="Clear" onclick="delete_layers()"><i
+                        class="fa fa-trash"></i></button>
+               <!--  <h6 class="h6">Clear</h6>  -->
+
+        
+                <!-- Info Button (Initially Hidden) -->
+                <button class="map-icon" id="Info" title="Info" >
+                    <i class="fa fa-circle-info"></i>
+                </button>
+               <!-- <h6 class="h6" id="infotitle"></h6>  critaria  -->
+
+
+                <button class="map-icon" id="simple" title="Chart and Report" >
+                    <i class="fas fa-chart-simple "></i>
+                </button>
+               <!-- <h6 class="h6" id="aa">Report</h6> -->
+
+
+
+
+
+
+                <!-- <button id="Info" style="display: none;">Info</button>
+                <div id="infoImageContainer" style="display: none;">
+                    <img id="infoImage" src="" alt="" />
+                    <button onclick="closeInfoImage()">Close</button>
+                </div> -->
+
+
+                <!-- Image Display Container -->
+                <div id="infoImageContainer" >
+                
+                    <img id="infoImage" src="" alt="Info Image" style="max-width:100%; height:auto;">
+                    <button onclick="closeInfoImage()" style="margin-top:10px; background-color:red; color:white; border:none; padding:5px 10px; cursor:pointer;">Close</button>
+                </div>
+
+
+
+
+           
+
+            </div>
+        </div>
+             <div class="data_table" id="streetLightTableContainer">
+			<nav class="feature_nav">
+			                <a>Zone-4 Roads with Street Light
+			                <a id="featureName" ></a>
+			                <div style="display: flex; align-items: center; margin-left: auto;">
+			                    <i class="fas fa-window-minimize" onclick="minimize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <i class="fas fa-window-maximize" onclick="maximize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <span class="table-cancel-btn" style="color: rgb(0, 0, 0);">
+			                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+			                    </span>
+			                </div>
+			            </nav>
+            <table id="dataTable_StreetLight">
+                <thead>
+                    <tr>
+                        <th> Road Id </th>
+                        <th> zone No </th>
+                        <th> zone Name </th>
+                        <th> Ward No </th>
+                        <th> Ward Name </th>
+                        <th> Road Name </th>
+                        <th> Row meter </th>
+                        <th> Row as per </th>
+                        <th> Lenght (Km) </th>
+                        <th> Condition </th>
+                        <th> Street Solar  &nbsp;&nbsp;
+							<!--<span class="table-cancel-btn"> 
+							                            <i id="cancelbtn1" class="fas fa-times cancel-btn"></i>
+							                        </span>-->
+							</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody_StreetLight">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!----------------------Road Age Table----------------->
+        <div class="data_table" id="EncroachmentTableContainer">
+			<nav class="feature_nav">
+			                <a>Roads with Encroachment
+			                <a id="featureName" ></a>
+			                <div style="display: flex; align-items: center; margin-left: auto;">
+			                    <i class="fas fa-window-minimize" onclick="minimize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <i class="fas fa-window-maximize" onclick="maximize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <span class="table-cancel-btn" style="color: rgb(0, 0, 0);">
+			                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+			                    </span>
+			                </div>
+			            </nav>
+            <table id="dataTable_Encroached">
+                <thead>
+                    <tr>
+                        <th style="width:130px"> Road Id </th>
+                        <th style="width:130px"> zone No </th>
+                        <!-- <th> zone Name </th> -->
+                        <th style="width:130px"> Ward No </th>
+                        <th style="width:130px"> Ward Name </th>
+                        <th style="width:130px"> Ownership </th>
+                        <th style="width:130px"> Type </th>
+                        <th style="width:250px"> Road Name </th>
+                        <th style="width:130px"> Row meter </th>
+                        <th style="width:130px"> Row as per </th>
+                        <!-- <th> Carriage Width </th> -->
+                        <th style="width:130px"> Material </th>
+                        <th style="width:130px"> Length (km) </th>
+                        <th style="width:130px"> Condition </th>
+                        <th style="width:130px"> Year Of Construction/Relaying </th>
+                       
+                        <th style="width:130px"> Encroachment &nbsp;&nbsp;
+							<!--<span class="table-cancel-btn"> 
+							                            <i id="cancelbtn1" class="fas fa-times cancel-btn"></i>
+							                        </span>-->
+							</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody_Encroached">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data_table" id="undevelopedTablecontainer">
+			<nav class="feature_nav">
+			                <a>Undeveloped Roads
+			                     </a>
+			                <a id="featureName" ></a>
+			                <div style="display: flex; align-items: center; margin-left: auto;">
+			                    <i class="fas fa-window-minimize" onclick="minimize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <i class="fas fa-window-maximize" onclick="maximize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <span class="table-cancel-btn" style="color: rgb(0, 0, 0);">
+			                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+			                    </span>
+			                </div>
+			            </nav>
+            <table id="UNderdevloped_dataTable">
+                <thead>
+                    <tr>
+                        <th style="width:130px">Road Id </th>
+                        <th style="width:130px"> Zone No. </th>
+                        <!-- <th style="width:130px"> Zone Name </th> -->
+                        <th style="width:130px"> Ward No </th>
+                        <th style="width:150px"> Ward Name </th>
+                        <!-- <th style="width:130px"> Ownership </th> -->
+                        <th style="width:130px"> Type </th>
+                        <th style="width:300px"> Road Name </th>
+                        <th style="width:130px"> ROW (M) </th>
+                        <th style="width:130px"> ROW (N.N) </th>
+                        <th style="width:130px"> Material </th>
+                        <th style="width:130px"> Length (km) </th>
+                        <th style="width:130px"> Condition </th>
+                        <th style="width:150px"> Year Of Construction/Relaying </th>
+                       
+                        <th style="width:150px"> Road's Status &nbsp;&nbsp;
+							<!--<span class="table-cancel-btn"> 
+							                            <i id="cancelbtn1" class="fas fa-times cancel-btn"></i>
+							                        </span>-->
+							 </th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody_UnderDevelopment">
+
+                </tbody>
+            </table>
+        </div>
+
+        <!--------spping boot live Drain data getting----->
+        <div class="data_table" id="RoadMaintenanceTableContainer">
+			<nav class="feature_nav">
+			                <a>Zone wise Road Condition
+			                    </a>
+			                <a id="featureName" ></a>
+			                <div style="display: flex; align-items: center; margin-left: auto;">
+			                    <i class="fas fa-window-minimize" onclick="minimize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <i class="fas fa-window-maximize" onclick="maximize1(this)"
+			                        style="margin-right: 10px;color: rgb(0, 0, 0);"></i>
+			                    <span class="table-cancel-btn" style="color: rgb(0, 0, 0);">
+			                        <i id="cancelbtn_table" class="fas fa-times cancel-btn"></i>
+			                    </span>
+			                </div>
+			            </nav>
+            <table id="dataTable_RoadMaintenance">
+                <thead>
+                    <tr>
+                        <th style="width:130px"> Road Id </th>
+                       
+                        <th style="width:130px"> Zone No. </th>
+                        <th style="width:130px"> Ward No </th>
+                        <th style="width:130px"> Ward Name </th>
+                        <th style="width:130px"> Road Name </th>
+                        <th style="width:130px"> Type </th>
+                        <th style="width:130px"> Condition </th>
+                        <th style="width:130px"> Material </th>
+                        <th style="width:130px"> Ownership </th>
+                       
+                        <th style="width:130px"> ROW </th>
+                        <th style="width:130px"> ROW AS PER </th>
+                        <th style="width:130px"> Length (Km) </th>
+                        <th style="width:130px"> Year of Construction/Relaying </th>
+                        <th style="width:130px"> Amenities </th>
+                        <th style="width:130px"> Maintenance &nbsp;&nbsp; 
+							<!--<span class="table-cancel-btn"> 
+                            <i id="cancelbtn1" class="fas fa-times cancel-btn"></i>
+                        </span>-->
+						 </th>
+                        <!-- <th style="width:130px"> Hospital </th>
+                        <th style="width:130px">Bank &nbsp;&nbsp; <span class="table-cancel-btn"> -->
+                                <!-- <i id="cancelbtn1" class="fas fa-times cancel-btn"></i>
+                            </span> </th> -->
+
+
+                    </tr>
+                </thead>
+                <tbody id="dataBody_RoadMaintenance">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Your HTML content -->
+        <!-- <div id="popup" class="ol-popup">          
+        </div> -->
+
+        <!-- popup for park polygon  -->
+        <div id="popup_1" class="popup_1"></div>
+
+        <!-- <div id="custom-popup" class="ol-popup" style="display: none;">
+            <a href="#" id="popup-closer" class="ol-popup-closer">×</a>
+            <div id="popup-content"></div>
+        </div> -->
+
+            <!------------------------- summary table start ------------------->
+          <div class="table_summary" id="summary-table">
+        <div class="content-wrapper">
+            <div id="topnav">
+                <div class="nav-links">
+                    <a href="#Summary" id="summary_id" onclick="navigateTo('Summary')">Summary</a>
+                </div>
+                <div class="icons">
+                    <!-- <i class="fas fa-window-minimize" onclick="minimize()"></i> -->
+                    <!-- <i class="fas fa-window-maximize" onclick="maximize()"></i> -->
+                    <i class="fas fa-window-close" onclick="closeNav()"></i>
+                </div>
+            </div>
+            <div id="content" class="card-container">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+        </div>
+        <div class="iframe-container">
+            <!-- <iframe src="https://lookerstudio.google.com/embed/reporting/c3f9a95e-f393-42ff-83af-773ea4166baf/page/l6xEE"" title="Sample iFrame"></iframe> -->
+            <iframe id="Street_light_frame"  src="https://lookerstudio.google.com/embed/reporting/75afaf3e-9129-459d-8b33-19213d3d4b8a/page/ydVcE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe>
+            <iframe id="undeveloped_frame" src="https://lookerstudio.google.com/embed/reporting/7a65460e-07af-4806-b245-f3fbeeafb1d2/page/p_o1i4kzorod" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe>
+            <iframe id="maintenance_frame" src="https://lookerstudio.google.com/embed/reporting/5ffdd498-970c-4770-9bbd-594b1400a6dd/page/labiE"  frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe>
+            <iframe id="encroached_frame"  src="https://lookerstudio.google.com/embed/reporting/9bb1b09a-de3c-4798-9546-62002f133a3c/page/p_ohjhprhood" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe>
+            <!-- <iframe id="iframe6" src="https://lookerstudio.google.com/embed/reporting/e1204976-9e38-41bb-879a-29faf84395ac/page/p_kbdaw6gzld" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe> -->
+        
+        </div>
+    </div>
+            <!------------------------ summary table end --------------------->
+
+    </div>
+    <!--------- main-container section end -------------->
+    <!-- <div class="legend-tab">
+        <button id="legendBtn">Show Legend</button>
+        <div id="live_legend" style="display: none;">
+            <h6>Legend</h6>
+            <ul>
+
+            </ul>
+        </div> ----->
+
+
+   
+    <!--------- footer section start ---------->
+    <div class="footer">
+        &copy; 2024 UP Remote Sensing Applications Centre. All rights reserved.
+    </div>
+    <!--------- footer section end ----------->
+    
+    <script src="../config.js"></script>  
+    <script src="../javascript/lko_analysis.js"></script>
+    <script>
+        function showIframe(iframeId) {
+            // Hide all iframes
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => iframe.hidden = true);
+            // Show the selected iframe
+            document.getElementById(iframeId).hidden = false;
+        }
+        
+       
+    </script>
+
+</body>
+
+</html>
